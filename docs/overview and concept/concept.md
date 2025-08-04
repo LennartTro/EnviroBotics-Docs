@@ -13,9 +13,9 @@ Here is a short intro video:
 
 
 <video width="100%" controls poster="/Summer-School-EnviroBotics/img/preview.jpg">
-  <source src="/Summer-School-EnviroBotics/video/Sim_vid.mp4" type="video/mp4" />
+  <source src="/EnviroBotics-Docs/video/Sim_vid.mp4" type="video/mp4" />
 </video>
 
 <video width="100%" controls poster="/Summer-School-EnviroBotics/img/preview.jpg">
-  <source src="/Summer-School-EnviroBotics/video/Video.mp4" type="video/mp4" />
+  <source src="/EnviroBotics-Docs/video/Video.mp4" type="video/mp4" />
 </video>
