@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkenviro_botics_summer_school=self.webpackChunkenviro_botics_summer_school||[]).push([[1903],{1912:o=>{o.exports=JSON.parse('{"blogBasePath":"/EnviroBotics-Docs/blog","blogTitle":"Blog","authorsListPath":"/EnviroBotics-Docs/blog/authors"}')}}]);

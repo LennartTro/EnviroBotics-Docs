@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkenviro_botics_summer_school=self.webpackChunkenviro_botics_summer_school||[]).push([[5742],{7093:s=>{s.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"default"}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkenviro_botics_summer_school=self.webpackChunkenviro_botics_summer_school||[]).push([[8032],{6412:o=>{o.exports=JSON.parse('{"metadata":{"permalink":"/EnviroBotics-Docs/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
