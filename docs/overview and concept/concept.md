@@ -25,3 +25,7 @@ Here is a further short intro video:
 <video width="100%" controls poster="/video/preview.jpg">
   <source src="/video/Video.mp4" type="video/mp4" />
 </video>
+
+<video width="100%" controls poster="/EnviroBotics-Docs/img/preview.jpg">
+  <source src="/EnviroBotics-Docs/video/Video.mp4" type="video/mp4" />
+</video>
