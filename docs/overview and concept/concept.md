@@ -52,6 +52,7 @@ This documentation serves as your central guide throughout the program.
 ## Hardware Architecture
 You will develop your algorithms in ROS and make use of the publisher/subscriber system, which allows us to run different functionalities on different machines. In fact ROS abstracts the communication in a way that we as users do not even recognize whether or not our programs/nodes communicate across different machines (computers) in the same network.
 
+<img src="/EnviroBotics-Docs/img/Hardware Architecture.png" alt="Concept Overview" style={{ width: '100%', marginBottom: '1rem' }} />
 ---
 
 ## Localization Module
