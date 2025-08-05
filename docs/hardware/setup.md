@@ -49,7 +49,8 @@ Each robot kit contains:
       style={{ width: '250px', height: 'auto', display: 'block' }}
     />
     <figcaption style={{ fontStyle: 'italic', color: '#555', fontSize: '0.9rem', marginTop: '0.5rem' }}>
-      Portable base station used to control and monitor the BlueBoat
+      Portable base station used to control and <br />
+      monitor the BlueBoat
     </figcaption>
   </figure>
 

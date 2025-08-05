@@ -93,7 +93,8 @@ You will develop your algorithms in ROS and make use of the publisher/subscriber
       style={{ width: '250px', height: 'auto', display: 'block' }}
     />
     <figcaption style={{ fontStyle: 'italic', color: '#555', fontSize: '0.9rem', marginTop: '0.5rem' }}>
-      Custom-built winch system for water temperature profiling
+      Custom-built winch system for water <br />
+      temperature profiling
     </figcaption>
   </figure>
 
