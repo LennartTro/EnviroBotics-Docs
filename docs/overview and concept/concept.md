@@ -17,11 +17,11 @@ Here is a short intro video:
 
 
 <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-  <video width="49%" controls poster="/EnviroBotics-Docs/img/preview.jpg">
+  <video width="40%" controls poster="/EnviroBotics-Docs/img/preview.jpg">
     <source src="/EnviroBotics-Docs/video/Sim_vid.mp4" type="video/mp4" />
   </video>
 
-  <video width="49%" controls poster="/EnviroBotics-Docs/img/preview.jpg">
+  <video width="40%" controls poster="/EnviroBotics-Docs/img/preview.jpg">
     <source src="/EnviroBotics-Docs/video/Video.mp4" type="video/mp4" />
   </video>
 </div>
