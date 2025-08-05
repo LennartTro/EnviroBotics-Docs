@@ -56,13 +56,7 @@ Each robot kit contains:
 
   <div style={{ flex: 1 }}>
     <p>
-      The <strong>Base Station</strong> is a portable control unit that enables remote operation of the BlueBoat during missions. It includes a rugged laptop or tablet running ROS 2 tools, a telemetry radio for long-range communication, and a GPS antenna for ground truth reference.
-    </p>
-    <p>
-      Designed for ease of deployment, the base station connects wirelessly to the BlueBoat via a high-gain radio link. Operators can monitor real-time sensor data, visualize the boat's position and heading, and issue autonomous or manual navigation commands.
-    </p>
-    <p>
-      The system is powered by a battery bank for field use and integrates seamlessly into ROS-based workflows, supporting tools such as RViz, rqt, and custom dashboards. It's your mission control on the shore.
+      The <strong>Base Station</strong> is a portable control unit that enables remote operation of the BlueBoat during missions. Designed for ease of deployment, the base station connects wirelessly to the BlueBoat via a high-gain radio link. Operators can monitor real-time sensor data, visualize the boat's position and heading, and issue autonomous or manual navigation commands.
     </p>
   </div>
 </div>
