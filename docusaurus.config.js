@@ -52,7 +52,7 @@ const config = {
           label: 'Documentation',
         },
         {
-          href: 'https://github.com/lennarttro/Summer-School-EnviroBotics',
+          href: 'https://github.com/lennarttro/EnviroBotics-Docs',
           label: 'GitHub',
           position: 'right',
         },
