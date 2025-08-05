@@ -15,7 +15,7 @@ const FeatureList = [
     ),
   },
   {
-    title: 'BlueBoat Environmental Platform',
+    title: 'BlueBoat Platform',
     imgSrc: '/img/Pool_BlueBoat.jpg',
     description: (
       <>

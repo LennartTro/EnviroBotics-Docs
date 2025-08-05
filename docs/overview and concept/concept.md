@@ -14,6 +14,7 @@ We will be using the ROS 2 framework. To evaluate the algorithms and solutions b
 This documentation serves as your central guide throughout the program.
 
 **Here is a short intro video:**
+<img src="/EnviroBotics-Docs/img/Concept.jpeg" alt="Concept Overview" style={{ width: '100%', marginBottom: '1rem' }} />
 
 <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
   <div style={{ flex: '1 1 40%', aspectRatio: '16 / 9' }}>
