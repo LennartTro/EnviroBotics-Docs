@@ -13,19 +13,7 @@ We will be using the ROS 2 framework. To evaluate the algorithms and solutions b
 
 This documentation serves as your central guide throughout the program.
 
-Here is a short intro video:
-
-
-<div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-  <video width="40%" controls poster="/EnviroBotics-Docs/img/preview.jpg">
-    <source src="/EnviroBotics-Docs/video/Sim_vid.mp4" type="video/mp4" />
-  </video>
-
-  <video width="40%" controls poster="/EnviroBotics-Docs/img/preview.jpg">
-    <source src="/EnviroBotics-Docs/video/Video.mp4" type="video/mp4" />
-  </video>
-</div>
-
+**Here is a short intro video:**
 
 <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
   <div style={{ flex: '1 1 40%', aspectRatio: '16 / 9' }}>
@@ -47,6 +35,7 @@ Here is a short intro video:
 **Gazebo**
 
 [Gazebo](https://gazebosim.org/docs/fortress/getstarted/) is the standalone simulator that computes the physical behaviour of the objects in the simulation. It also generates sensor data or renders camera images of simulated camera sensors. gazebo itself is independent of ROS. Maybe it is the easiest to view gazebo as a drop-in replacement for the real world robot, so we can work on our algorithms without beeing in the lab all day.
+
 **ROS2**
 
 [ROS2](https://www.ros.org/) is the framework we use in this course. So probably most of the time (if not all) is spent on developing/implementing algorithms and letting them interact via the communication capabilities ROS 2 provides. Imagine ROS as some advanced message passing library. So instead of writing a single rather complex program, that handles all of our problems, we can use ROS to write multiple small programs that can communicate with each other via messages and solve only particular tasks.
