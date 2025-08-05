@@ -25,7 +25,8 @@ const sidebars = {
       type: 'category',
       label: 'Overview and Concept',
       items: ['overview and concept/overview',
-              'overview and concept/concept'],
+              'overview and concept/concept',
+              'overview and concept/target audience',],
         
     },
     {
