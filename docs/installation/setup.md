@@ -13,7 +13,7 @@ Before getting started, make sure you have all tools installed:
 - Visual Studio Code
 
 ## Tools to Install
-- ....
+- ...
 - Docker (if applicable)
 
 Follow the step-by-step setup instructions provided during the first session.
