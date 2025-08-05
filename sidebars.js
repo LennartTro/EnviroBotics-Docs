@@ -41,6 +41,11 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Hardware',
+      items: ['hardware/hardware-setup'],
+    },
+    {
+      type: 'category',
       label: 'Tutorials and Resources',
       items: ['tutorials/getting-started'],
     },
@@ -48,11 +53,6 @@ const sidebars = {
       type: 'category',
       label: 'Project Workflow',
       items: ['workflow/workflow'],
-    },
-    {
-      type: 'category',
-      label: 'Hardware',
-      items: ['hardware/hardware-setup'],
     },
     {
       type: 'category',

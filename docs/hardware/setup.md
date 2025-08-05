@@ -7,17 +7,64 @@ title: Hardware Setup
 
 Each robot kit contains:
 
-- 1 Microcontroller (e.g., ESP32 or Raspberry Pi)
-- 2 Motors + Motor Driver
-- Battery Pack
-- Environmental Sensors (e.g., Temperature, Humidity, CO2)
-- Chassis + Wheels
-- Cables, Screws, Breadboard
+- ...
 
 ## Assembly Guide
-1. Mount motors to chassis
-2. Wire motor driver
-3. Connect sensors to pins
-4. Power it all up!
+1. ...
 
-Refer to the illustrated hardware PDF for exact pinouts.
+
+## BlueBoat
+
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px', marginBottom: '2rem' }}>
+  <figure style={{ margin: 0 }}>
+    <img
+      src="/EnviroBotics-Docs/img/BlueBoat.png"
+      alt="BlueBoat from BlueRobotics"
+      style={{ width: '250px', height: 'auto', display: 'block' }}
+    />
+    <figcaption style={{ fontStyle: 'italic', color: '#555', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+      BlueBoat surface vessel developed by BlueRobotics
+    </figcaption>
+  </figure>
+
+  <div style={{ flex: 1 }}>
+    <p>
+      The <strong>BlueBoat</strong> is an autonomous surface vessel developed by <a href="https://bluerobotics.com/store/rov/bluerov2/" target="_blank">BlueRobotics</a>.
+      It's designed for environmental monitoring, data collection, and research applications on lakes, rivers, and coastal waters.
+    </p>
+    <p>
+      In the EnviroBotics Summer School, the BlueBoat serves as a flexible and robust research platform. With GPS-based navigation,
+      payload integration support, and compatibility with ROS, it allows students to deploy and test their autonomous algorithms in real-world environments.
+    </p>
+  </div>
+</div>
+
+## BaseStation
+
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px', marginBottom: '2rem' }}>
+  <figure style={{ margin: 0 }}>
+    <img
+      src="/EnviroBotics-Docs/img/Basestation.jpg"
+      alt="Base Station for BlueBoat operations"
+      style={{ width: '250px', height: 'auto', display: 'block' }}
+    />
+    <figcaption style={{ fontStyle: 'italic', color: '#555', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+      Portable base station used to control and monitor the BlueBoat
+    </figcaption>
+  </figure>
+
+  <div style={{ flex: 1 }}>
+    <p>
+      The <strong>Base Station</strong> is a portable control unit that enables remote operation of the BlueBoat during missions. It includes a rugged laptop or tablet running ROS 2 tools, a telemetry radio for long-range communication, and a GPS antenna for ground truth reference.
+    </p>
+    <p>
+      Designed for ease of deployment, the base station connects wirelessly to the BlueBoat via a high-gain radio link. Operators can monitor real-time sensor data, visualize the boat's position and heading, and issue autonomous or manual navigation commands.
+    </p>
+    <p>
+      The system is powered by a battery bank for field use and integrates seamlessly into ROS-based workflows, supporting tools such as RViz, rqt, and custom dashboards. It's your mission control on the shore.
+    </p>
+  </div>
+</div>
+
+
+
