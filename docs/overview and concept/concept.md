@@ -3,7 +3,7 @@ id: concept
 title: Concept
 ---
 
-# Concept of the Summer School
+# Concept of the EnviroBotics Summer School
 
 The EnviroBotics Summer School introduces students to environmental robotics, combining hardware, software, and real-world data collection. Participants will work in teams, build their own robots, and program them to perform meaningful tasks related to environmental monitoring.
 
