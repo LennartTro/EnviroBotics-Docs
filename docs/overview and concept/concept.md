@@ -57,5 +57,28 @@ You will develop your algorithms in ROS and make use of the publisher/subscriber
 
 ## Localization Module
 
-<img src="/EnviroBotics-Docs/img/ArduSimple.jpg" alt="Concept Overview" style={{ width: '40%', marginBottom: '1rem' }} />
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px', marginBottom: '2rem' }}>
+  <figure style={{ margin: 0 }}>
+    <img
+      src="/EnviroBotics-Docs/img/ArduSimple.jpg"
+      alt="ArduSimple GNSS Module"
+      style={{ width: '250px', height: 'auto', display: 'block' }}
+    />
+    <figcaption style={{ fontStyle: 'italic', color: '#555', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+      [ArduSimple GNSS module with NTRIP Client] (https://www.ardusimple.de/product/simplertk2b-v3-4g-ntrip-starter-kit/)
+    </figcaption>
+  </figure>
+
+  <div style={{ flex: 1 }}>
+    <p>
+      The ArduSimple GNSS module is used in the summer school to provide high-precision GPS data. It enables the robots
+      to localize themselves accurately in outdoor environments, which is crucial for tasks like waypoint navigation
+      and mapping.
+    </p>
+    <p>
+      The module supports RTK (Real-Time Kinematic) positioning for centimeter-level accuracy, making it a valuable
+      component for our robotic system in real-world deployment.
+    </p>
+  </div>
+</div>
 ---
