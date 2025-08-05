@@ -65,7 +65,7 @@ You will develop your algorithms in ROS and make use of the publisher/subscriber
       style={{ width: '250px', height: 'auto', display: 'block' }}
     />
     <figcaption style={{ fontStyle: 'italic', color: '#555', fontSize: '0.9rem', marginTop: '0.5rem' }}>
-      [ArduSimple GNSS module with NTRIP Client] (https://www.ardusimple.de/product/simplertk2b-v3-4g-ntrip-starter-kit/)
+      ArduSimple GNSS module with NTRIP Client
     </figcaption>
   </figure>
 
