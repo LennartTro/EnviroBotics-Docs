@@ -24,13 +24,21 @@ Here is a short intro video:
   <source src="/EnviroBotics-Docs/video/Video.mp4" type="video/mp4" />
 </video>
 
+---
+
 ## Keywords
 **Gazebo**
-Gazebo is the standalone simulator that computes the physical behaviour of the objects in the simulation. It also generates sensor data or renders camera images of simulated camera sensors. gazebo itself is independent of ROS. Maybe it is the easiest to view gazebo as a drop-in replacement for the real world robot, so we can work on our algorithms without beeing in the lab all day.
+
+[Gazebo](https://gazebosim.org/docs/fortress/getstarted/) is the standalone simulator that computes the physical behaviour of the objects in the simulation. It also generates sensor data or renders camera images of simulated camera sensors. gazebo itself is independent of ROS. Maybe it is the easiest to view gazebo as a drop-in replacement for the real world robot, so we can work on our algorithms without beeing in the lab all day.
 **ROS2**
-ROS 2 is the framework we use in this course. So probably most of the time (if not all) is spent on developing/implementing algorithms and letting them interact via the communication capabilities ROS 2 provides. Imagine ROS as some advanced message passing library. So instead of writing a single rather complex program, that handles all of our problems, we can use ROS to write multiple small programs that can communicate with each other via messages and solve only particular tasks.
+
+[ROS2](https://www.ros.org/) is the framework we use in this course. So probably most of the time (if not all) is spent on developing/implementing algorithms and letting them interact via the communication capabilities ROS 2 provides. Imagine ROS as some advanced message passing library. So instead of writing a single rather complex program, that handles all of our problems, we can use ROS to write multiple small programs that can communicate with each other via messages and solve only particular tasks.
+
+---
 
 ## Hardware Architecture
+You will develop your algorithms in ROS and make use of the publisher/subscriber system, which allows us to run different functionalities on different machines. In fact ROS abstracts the communication in a way that we as users do not even recognize whether or not our programs/nodes communicate across different machines (computers) in the same network.
 
+---
 
 ## Localization Module
