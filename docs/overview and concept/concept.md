@@ -16,7 +16,7 @@ This documentation serves as your central guide throughout the program.
 **Here is a short intro:**
 <img src="/EnviroBotics-Docs/img/Concept.jpg" alt="Concept Overview" style={{ width: '100%', marginBottom: '1rem' }} />
 
-<div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
+<div style={{ display: 'flex', justifyContent: 'space-between', gap: '60px', flexWrap: 'wrap' }}>
   <div style={{ flex: '1 1 40%', aspectRatio: '16 / 9' }}>
     <video controls poster="/EnviroBotics-Docs/img/preview.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
       <source src="/EnviroBotics-Docs/video/Sim_vid.mp4" type="video/mp4" />
