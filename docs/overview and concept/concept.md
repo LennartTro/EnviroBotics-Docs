@@ -26,6 +26,21 @@ Here is a short intro video:
   </video>
 </div>
 
+
+<div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
+  <div style={{ flex: '1 1 40%', aspectRatio: '16 / 9' }}>
+    <video controls poster="/EnviroBotics-Docs/img/preview.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
+      <source src="/EnviroBotics-Docs/video/Sim_vid.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <div style={{ flex: '1 1 40%', aspectRatio: '16 / 9' }}>
+    <video controls poster="/EnviroBotics-Docs/img/preview.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
+      <source src="/EnviroBotics-Docs/video/Video.mp4" type="video/mp4" />
+    </video>
+  </div>
+</div>
+
 ---
 
 ## Keywords
