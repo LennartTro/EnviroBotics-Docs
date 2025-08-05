@@ -56,3 +56,6 @@ You will develop your algorithms in ROS and make use of the publisher/subscriber
 ---
 
 ## Localization Module
+
+<img src="/EnviroBotics-Docs/img/ArduSimple.jpg" alt="Concept Overview" style={{ width: '100%', marginBottom: '1rem' }} />
+---
