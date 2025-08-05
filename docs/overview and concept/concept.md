@@ -82,3 +82,32 @@ You will develop your algorithms in ROS and make use of the publisher/subscriber
   </div>
 </div>
 ---
+
+## Measurement Module
+
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px', marginBottom: '2rem' }}>
+  <figure style={{ margin: 0 }}>
+    <img
+      src="/EnviroBotics-Docs/img/MeasurementModule.jpg"
+      alt="Measurement Module"
+      style={{ width: '250px', height: 'auto', display: 'block' }}
+    />
+    <figcaption style={{ fontStyle: 'italic', color: '#555', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+      Custom-built winch system for water temperature profiling
+    </figcaption>
+  </figure>
+
+  <div style={{ flex: 1 }}>
+    <p>
+      The measurement module is designed to lower a temperature sensor into different water depths using a
+      motor-driven winch. It enables students to collect vertical temperature profiles of a lake with high spatial
+      precision.
+    </p>
+    <p>
+      The system is fully integrated into ROS, allowing remote control via ROS nodes. Target depths can be commanded
+      dynamically, and data can be stored onboard or transmitted wirelessly to a base station.
+    </p>
+  </div>
+</div>
+
+---
