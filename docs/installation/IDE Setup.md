@@ -1,7 +1,7 @@
 ---
-id: Install IDE Setup
-title: Install IDE Setup
+id: IDE Setup
+title: IDE Setup
 ---
 
-# Install IDE Setup
+# IDE Setup
 
