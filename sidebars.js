@@ -32,7 +32,12 @@ const sidebars = {
     {
       type: 'category',
       label: 'Installation and Setup',
-      items: ['installation/setup'],
+      items: ['installation/setup',
+              'installation/Install Ubuntu',
+              'installation/Install Docker',
+              'installation/Install ROS',
+              'installation/Install QGroundControl',
+              'installation/IDE Setup',],
     },
     {
       type: 'category',
