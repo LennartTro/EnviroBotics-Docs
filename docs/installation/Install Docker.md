@@ -16,20 +16,20 @@ sudo apt-get install \
     curl \
     gnupg \
     lsb-release
-
+```
 
 <details>
 <summary><strong>What is Docker and why are we using it?</strong></summary>
 
 <br/>
 
-## 🐳 Docker in Robotics: Why we use containers instead of full system installations
+## Docker in Robotics: Why we use containers instead of full system installations
 
 ### What is Docker?
 
 Docker is a platform that allows you to **package software environments into containers**. These containers include your application, all necessary dependencies, and even a minimal operating system — so they run **consistently on any computer**.
 
-> 👉 Think of Docker as a “portable lab environment” that always works the same way, no matter where it runs.
+> Think of Docker as a “portable lab environment” that always works the same way, no matter where it runs.
 
 ---
 
@@ -118,7 +118,7 @@ Especially in a robotics summer school with many participants and diverse comput
 
   #### Visual overview:
 
-  <img src="/EnviroBotics-Docs/img/docker-architecture.png" alt="Docker vs Native Setup Comparison" style={{ width: '100%', border: '1px solid #ccc', borderRadius: '8px', marginTop: '1rem' }} />
+  <img src="/EnviroBotics-Docs/img/Docker_CHATGPT.png" alt="Docker vs Native Setup Comparison" style={{ width: '100%', border: '1px solid #ccc', borderRadius: '8px', marginTop: '1rem' }} />
 
 </details>
 
