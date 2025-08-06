@@ -31,6 +31,25 @@ Docker is a platform that allows you to **package software environments into con
 
 > Think of Docker as a “portable lab environment” that always works the same way, no matter where it runs.
 
+Each container behaves like a lightweight virtual computer — but without the overhead of a full virtual machine.
+
+In robotics, Docker is especially useful because it allows us to:
+
+- Avoid the “it works on my machine” problem  
+- Share **identical environments** across multiple students and developers  
+- Quickly switch between ROS versions or setups  
+- Ensure that everyone works with the exact same system configuration
+
+Without Docker, each student would need to manually install a matching Linux OS, ROS version, simulator setup, and all dependencies — a tedious and error-prone process.
+
+Docker containers are cross-platform and portable. You can run them on Windows, macOS, or Linux — as long as Docker is installed. This makes collaboration, version control, and system replication significantly easier.
+
+<br/>
+
+#### Visual overview:
+
+<img src="/EnviroBotics-Docs/img/Docker_CHATGPT.png" alt="Docker vs Native Setup Comparison" style={{ width: '80%', border: '1px solid #ccc', borderRadius: '8px', marginTop: '1rem' }} />
+
 ---
 
 ### Why is Docker useful for ROS?
@@ -50,11 +69,13 @@ Docker solves this by:
 ### How Docker works (simplified)
 
 #### Without Docker (traditional installation)
+```
 | Laptop / PC
 | ├─ OS (e.g. Ubuntu 22.04)
 | ├─ ROS 2 Humble
 | ├─ Python 3.10
 | └─ Manually installed libraries and tools
+```
 
 **Problems:**  
 – Everyone has a slightly different setup  
@@ -98,32 +119,5 @@ Using Docker ensures:
 - Easy sharing and portability of projects
 
 Especially in a robotics summer school with many participants and diverse computers, Docker is the **fastest, safest, and most efficient** way to get everyone up and running.
-
-<details>
-  <summary>What is Docker and why do we use it in robotics?</summary>
-
-  <br/>
-
-  Docker is a containerization platform that lets you package software along with all its dependencies, configurations, and system tools into isolated units called **containers**. Each container behaves like a lightweight virtual computer — but without the overhead of a full virtual machine.
-
-  In robotics, Docker is especially useful because it allows us to:
-
-  - Avoid the “it works on my machine” problem  
-  - Share **identical environments** across multiple students and developers  
-  - Quickly switch between ROS versions or setups  
-  - Ensure that everyone works with the exact same system configuration
-
-  Without Docker, each student would need to manually install a matching Linux OS, ROS version, simulator setup, and all dependencies — a tedious and error-prone process.
-
-  Docker containers are cross-platform and portable. You can run them on Windows, macOS, or Linux — as long as Docker is installed. This makes collaboration, version control, and system replication significantly easier.
-
-  <br/>
-
-  #### Visual overview:
-
-  <img src="/EnviroBotics-Docs/img/Docker_CHATGPT.png" alt="Docker vs Native Setup Comparison" style={{ width: '100%', border: '1px solid #ccc', borderRadius: '8px', marginTop: '1rem' }} />
-
-</details>
-
 
 </details>
