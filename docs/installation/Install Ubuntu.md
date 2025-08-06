@@ -5,4 +5,4 @@ title: Install Ubuntu
 
 # Install Ubuntu
 
-It's already installed inside the Docker-Container
+You don't need to install a specific Ubuntu version - it is already part of the Docker-Container

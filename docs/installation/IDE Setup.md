@@ -5,7 +5,7 @@ title: IDE Setup
 
 # IDE Setup
 
-## 🛠️ Installing Visual Studio Code on Ubuntu
+## Installing Visual Studio Code on Ubuntu
 
 Here are two recommended installation methods to get VS Code running on Ubuntu.
 
