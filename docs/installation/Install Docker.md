@@ -48,7 +48,7 @@ Docker containers are cross-platform and portable. You can run them on Windows, 
 
 #### Visual overview:
 
-<img src="/EnviroBotics-Docs/img/Docker_CHATGPT.png" alt="Docker vs Native Setup Comparison" style={{ width: '80%', border: '1px solid #ccc', borderRadius: '8px', marginTop: '1rem' }} />
+<img src="/EnviroBotics-Docs/img/Docker_CHATGPT.png" alt="Docker vs Native Setup Comparison" style={{ width: '50%', border: '1px solid #ccc', borderRadius: '8px', marginTop: '1rem' }} />
 
 ---
 
