@@ -43,6 +43,17 @@ This documentation serves as your central guide throughout the program.
 
 [ROS2](https://www.ros.org/) is the framework we use in this course. So probably most of the time (if not all) is spent on developing/implementing algorithms and letting them interact via the communication capabilities ROS 2 provides. Imagine ROS as some advanced message passing library. So instead of writing a single rather complex program, that handles all of our problems, we can use ROS to write multiple small programs that can communicate with each other via messages and solve only particular tasks.
 
+**ArduPilot**
+
+[ArduPilot](https://ardupilot.org/) is an open-source autopilot system that supports a wide variety of vehicles — from drones and rovers to boats and submarines. It offers robust features for autonomous navigation, sensor integration, mission planning, and vehicle control in both real and simulated environments.
+
+In the EnviroBotics Summer School, ArduPilot acts as the central controller for the **BlueBoat**, managing inputs from GPS, IMUs, and other sensors to control the motors and execute navigation tasks. It runs onboard the vehicle and ensures autonomous behavior even without a permanent connection to a ground station.
+
+Because ArduPilot communicates via the **MAVLink** protocol, it can easily integrate with **ROS 2**, enabling seamless data sharing and coordination between your software nodes and the vehicle's control system. When combined with **Gazebo**, ArduPilot allows complete testing of mission logic in simulation before deployment on real hardware.
+
+You can think of ArduPilot as the *autonomous pilot* of your robot: it constantly reads sensor data, evaluates the current mission goals, and adjusts the vehicle’s control signals accordingly — all in real time.
+
+
 **Docker**
 
 [Docker](https://www.docker.com/) is a platform that helps you package software into standardized units called *containers*. These containers bundle your application code along with everything it needs to run – libraries, dependencies, and system tools. In the context of robotics, Docker makes it easy to ensure that all participants have the exact same development environment, avoiding the infamous “but it works on my machine” problem. During the summer school, we’ll use Docker to provide you with pre-configured environments for ROS, simulation tools, and more – so you can focus on building cool things, not debugging setups.
