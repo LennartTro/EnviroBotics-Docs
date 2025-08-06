@@ -50,6 +50,18 @@ In the EnviroBotics Summer School, ArduPilot acts as the central controller for 
 Because ArduPilot communicates via the **MAVLink** protocol, it can easily integrate with **ROS 2**, enabling seamless data sharing and coordination between your software nodes and the vehicle's control system. When combined with **Gazebo**, ArduPilot allows complete testing of mission logic in simulation before deployment on real hardware.
 You can think of ArduPilot as the *autonomous pilot* of your robot: it constantly reads sensor data, evaluates the current mission goals, and adjusts the vehicle’s control signals accordingly — all in real time.
 
+**QGroundControl**
+
+[QGroundControl](https://qgroundcontrol.com/) is a cross-platform ground control station (GCS) for drones, rovers, and autonomous vehicles. It provides a user-friendly interface to monitor and control vehicles running autopilot systems like **ArduPilot** or **PX4**.
+In the Summer School, QGroundControl is used to:
+- Visualize the BlueBoat’s GPS position and sensor data in real time.
+- Upload and manage autonomous missions with waypoints.
+- Calibrate sensors such as compasses or IMUs.
+- Monitor vehicle parameters (battery status, telemetry, logs).
+- Manually control the boat during testing or debugging.
+QGroundControl communicates with the vehicle using the **MAVLink** protocol, just like ArduPilot. It acts as a bridge between the operator and the robot, enabling both real-time control and mission planning.
+You can think of QGroundControl as the *mission control center*: while ROS and ArduPilot handle the onboard autonomy, QGroundControl provides a visual overview and fine-tuning of everything happening on (or inside) the BlueBoat.
+
 
 **Docker**
 
