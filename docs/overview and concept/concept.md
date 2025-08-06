@@ -46,11 +46,8 @@ This documentation serves as your central guide throughout the program.
 **ArduPilot**
 
 [ArduPilot](https://ardupilot.org/) is an open-source autopilot system that supports a wide variety of vehicles — from drones and rovers to boats and submarines. It offers robust features for autonomous navigation, sensor integration, mission planning, and vehicle control in both real and simulated environments.
-
 In the EnviroBotics Summer School, ArduPilot acts as the central controller for the **BlueBoat**, managing inputs from GPS, IMUs, and other sensors to control the motors and execute navigation tasks. It runs onboard the vehicle and ensures autonomous behavior even without a permanent connection to a ground station.
-
 Because ArduPilot communicates via the **MAVLink** protocol, it can easily integrate with **ROS 2**, enabling seamless data sharing and coordination between your software nodes and the vehicle's control system. When combined with **Gazebo**, ArduPilot allows complete testing of mission logic in simulation before deployment on real hardware.
-
 You can think of ArduPilot as the *autonomous pilot* of your robot: it constantly reads sensor data, evaluates the current mission goals, and adjusts the vehicle’s control signals accordingly — all in real time.
 
 
