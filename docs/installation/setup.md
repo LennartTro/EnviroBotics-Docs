@@ -3,17 +3,26 @@ id: setup
 title: Installation & Setup
 ---
 
-# Installation & Setup
+## Clone & Run BlueBoat ArduPilot Simulation in Docker
 
-Before getting started, make sure you have all tools installed:
+```bash
+# Clone the repository
+git clone https://github.com/markusbuchholz/gazebosim_blueboat_ardupilot_sitl.git
+cd gazebosim_blueboat_ardupilot_sitl
 
-## Prerequisites
-- Ubuntu 22.04 or later
-- Python ≥ 3.1
-- Visual Studio Code
+# Optional but recommended: Check the Dockerfile and build context
+ls
+cat Dockerfile
 
-## Tools to Install
-- ...
-- Docker (if applicable)
+# Build the Docker container
+sudo docker build -t blueboat-sitl .
+
+# Run the container (with GUI support if needed)
+sudo docker run -it --rm \
+    --env="DISPLAY=$DISPLAY" \
+    --env="QT_X11_NO_MITSHM=1" \
+    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+    blueboat-sitl
+```
 
 Follow the step-by-step setup instructions provided during the first session.

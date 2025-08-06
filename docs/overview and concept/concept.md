@@ -55,6 +55,23 @@ You can think of ArduPilot as the *autonomous pilot* of your robot: it constantl
 
 [Docker](https://www.docker.com/) is a platform that helps you package software into standardized units called *containers*. These containers bundle your application code along with everything it needs to run – libraries, dependencies, and system tools. In the context of robotics, Docker makes it easy to ensure that all participants have the exact same development environment, avoiding the infamous “but it works on my machine” problem. During the summer school, we’ll use Docker to provide you with pre-configured environments for ROS, simulation tools, and more – so you can focus on building cool things, not debugging setups.
 
+**Visual Studio Code (VS Code)**
+
+[Visual Studio Code](https://code.visualstudio.com/) is a lightweight but powerful source code editor developed by Microsoft. It supports a wide range of programming languages and tools, and it's especially popular in robotics and ROS development due to its flexibility and extensive plugin ecosystem.
+
+In the context of this summer school, VS Code serves as your primary development environment. It offers features such as:
+
+- Syntax highlighting and code completion for Python, C++, and ROS
+- Integrated terminal for building, launching, and testing code
+- Built-in Git version control
+- Support for Docker and remote development via extensions
+- Helpful debugging tools and visualization of running ROS nodes
+
+By using the [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) extension, you can even run VS Code *inside the Docker container*, meaning you don’t have to install ROS or any tools directly on your machine. This ensures a consistent development experience across all participants.
+
+You can think of VS Code as your *workbench* – where you write, test, and manage all the software components of your robot.
+
+
 ---
 
 ## Hardware Architecture
