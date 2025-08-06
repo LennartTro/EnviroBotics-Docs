@@ -62,6 +62,10 @@ Docker solves this by:
 – Setup takes time and can break things
 
 #### With Docker
+<details>
+  <summary>Click to see the Docker architecture layout</summary>
+
+  <br/>
 | Laptop / PC
 | ├─ Any OS (Windows, macOS, Linux)
 | ├─ Docker Engine
@@ -70,7 +74,7 @@ Docker solves this by:
 ├─ ROS 2 Humble
 ├─ Python 3.10
 └─ All required tools and libraries
-
+</details>
 
 **Benefits:**  
 – Same environment for everyone  
