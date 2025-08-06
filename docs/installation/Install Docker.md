@@ -10,13 +10,87 @@ title: Install Docker
 To install Docker on Ubuntu, run the following:
 
 ```bash
+# Update your existing list of packages
 sudo apt-get update
-sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+
+# Install packages to allow apt to use a repository over HTTPS
+sudo apt-get install ca-certificates curl
+
+# Add Docker’s official GPG key:
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the Docker repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo \"${UBUNTU_CODENAME:-$VERSION_CODENAME}\") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Update your package list again
+sudo apt-get update
+
+# Install Docker Engine
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Test the installation
+sudo docker run hello-world
 ```
+
+## Setup Instructions
+
+<Accordion type="multiple">
+
+<AccordionItem title="🧱 1. Install Docker on Ubuntu (official method)">
+
+```bash
+# Update your existing list of packages
+sudo apt-get update
+
+# Install packages to allow apt to use a repository over HTTPS
+sudo apt-get install ca-certificates curl
+
+# Add Docker’s official GPG key:
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the Docker repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo \"${UBUNTU_CODENAME:-$VERSION_CODENAME}\") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Update your package list again
+sudo apt-get update
+
+# Install Docker Engine
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Test the installation
+sudo docker run hello-world
+
+</AccordionItem> <AccordionItem title="🚤 2. Clone & Run BlueBoat ArduPilot Simulation in Docker">
+
+# Clone the repository
+git clone https://github.com/markusbuchholz/gazebosim_blueboat_ardupilot_sitl.git
+cd gazebosim_blueboat_ardupilot_sitl
+
+# Optional but recommended: Check the Dockerfile and build context
+ls
+cat Dockerfile
+
+# Build the Docker container
+sudo docker build -t blueboat-sitl .
+
+# Run the container (with GUI support if needed)
+sudo docker run -it --rm \
+    --env="DISPLAY=$DISPLAY" \
+    --env="QT_X11_NO_MITSHM=1" \
+    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+    blueboat-sitl
+
+</AccordionItem> </Accordion> ```
 
 <details>
 <summary><strong>What is Docker and why are we using it?</strong></summary>
