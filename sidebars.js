@@ -47,7 +47,9 @@ const sidebars = {
     {
       type: 'category',
       label: 'Tutorials and Resources',
-      items: ['tutorials/getting-started'],
+      items: ['tutorials/getting-started',
+              'tutorials/start simulation'
+          ],
     },
     {
       type: 'category',

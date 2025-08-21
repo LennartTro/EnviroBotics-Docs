@@ -6,3 +6,8 @@ title: Getting started
 # Getting started
 
 
+## Clone the repository
+
+## Build a Docker Image
+
+## Start a Docker Container
