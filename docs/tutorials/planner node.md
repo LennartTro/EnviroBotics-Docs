@@ -5,8 +5,23 @@ title: Creating a BlueBoat Planner Node
 
 # BlueBoat Planner Node
 
-This page explains how to create a new ROS 2 package containing a **Planner Node** that sends multiple target coordinates to the BlueBoat. The boat visits each location, waits briefly (simulating an action), and then continues to the next.
 
+While the controller node ensures that the BlueBoat can navigate to a single target position, it does **not manage missions or sequences of goals**In real-world scenarios, however, we often want our robot to:
+
+Visit multiple waypoints,
+
+ - Perform specific actions at each stop (e.g., environmental measurements),
+ - And continue the mission autonomously without manual intervention.
+
+To achieve this, we introduce a **planner node** whose role is to orchestrate the mission:
+
+ - It maintains a list of goal positions.
+ - It sends each target to the controller via a **ROS 2 service call**.
+ - It listens to a feedback topic (/target_reached) to know when the boat has arrived.
+ - It performs an action (e.g., logging, waiting, spawning markers) at each waypoint before moving to the next.
+
+This decoupled design ensures modularity:
+The planner handles the **"what to do"**, and the controller takes care of **"how to get there"**.
 ---
 
 ## Create a new ROS 2 package

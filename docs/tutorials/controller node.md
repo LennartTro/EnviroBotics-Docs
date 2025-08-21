@@ -3,8 +3,21 @@ id: controller node
 title: Adjust you controller
 ---
 
-# Test
+# Motivation for Updating the Controller
 
+Up to this point, our controller was capable of guiding the BlueBoat to a single fixed target position. While this is a useful starting point, our actual mission requires more complex behavior:
+
+ - The BlueBoat should visit multiple waypoints in sequence.
+ - At each waypoint, a specific action should be performed (e.g., measuring water temperature).
+ - The vehicle must hold its position reliably during these operations.
+
+To implement this functionality, we introduce a separate planner node that is responsible for:
+
+ - Sending a sequence of target positions to the controller.
+ - Waiting until the target is reached.
+ - Triggering any desired actions at each waypoint.
+
+This separation of concerns allows the controller to focus purely on navigation and stabilization, while the planner handles mission logic.
 
 ``` python 
 #!/usr/bin/env python3

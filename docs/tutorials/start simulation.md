@@ -85,6 +85,7 @@ source gazebo_exports.sh
 
 ## Step 3 – Start Start QGroundControl (outside Docker)
 
+Just click on the icon
 
 ---
 
