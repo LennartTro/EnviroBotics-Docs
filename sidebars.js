@@ -48,8 +48,9 @@ const sidebars = {
       type: 'category',
       label: 'Tutorials and Resources',
       items: ['tutorials/getting-started',
-              'tutorials/start simulation'
-          ],
+              'tutorials/start simulation',
+              'tutorials/build ROS nodes'
+              ],
     },
     {
       type: 'category',
