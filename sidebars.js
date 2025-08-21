@@ -49,7 +49,9 @@ const sidebars = {
       label: 'Tutorials and Resources',
       items: ['tutorials/getting-started',
               'tutorials/start simulation',
-              'tutorials/build ROS nodes'
+              'tutorials/build ROS nodes',
+              'tutorials/controller node',
+              'tutorials/planner node'
               ],
     },
     {

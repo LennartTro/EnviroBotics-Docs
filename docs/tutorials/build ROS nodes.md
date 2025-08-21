@@ -4,13 +4,13 @@ title: Build your own ROS nodes
 ---
 
 
-# Writing Custom ROS 2 Nodes
+# Writing custom ROS 2 nodes
 
 To control the BlueBoat in the simulation (e.g., moving it to a certain position), you’ll typically write **custom ROS 2 nodes**. These nodes allow you to subscribe to sensor data, process it (e.g., with a control algorithm), and publish commands to actuators.
 
 ---
 
-## 1 What is a ROS 2 Node?
+## 1 What is a ROS 2 node?
 
 A **ROS 2 node** is a single, executable program in a distributed robotic system that communicates with other nodes using topics, services, or actions.
 
@@ -24,7 +24,7 @@ Each node can:
 Nodes are usually written in **Python** or **C++**. For simplicity, we will use **Python** in our Summer School.
 
 ---
-## 2 Build your own Node
+## 2 Build your own nodes
 ### 1 Structure of a Simple Node (Python)
 
 Below is a minimal ROS 2 node in Python that logs a message once per second.
@@ -76,7 +76,7 @@ Then add your Python node (e.g., pid_controller.py) to the blueboat_controller/b
 
 ---
 
-### 3 Building and Running your Node
+### 3 Building and Running your node
 Build:
 ```bash
 cd ~/ros2_ws
@@ -91,17 +91,14 @@ ros2 run blueboat_controller pid_controller
 ```
 This will start your custom node.
 
-### 4 Customize your controller:
-
-``` python 
+### 4 Customize your node:
+``` python
 #!/usr/bin/env python3
 
 import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import Odometry
 from pymavlink import mavutil
-from blueboat_interfaces.srv import SetTarget
-from std_msgs.msg import Bool
 import math
 import time
 
@@ -111,11 +108,11 @@ class PID:
         self.kp, self.ki, self.kd = kp, ki, kd
         self.prev_error = 0.0
         self.integral = 0.0
-        self.last_time = None
+        self.last_time = time.time()
 
-    def update(self, error):
+    def compute(self, error):
         now = time.time()
-        dt = now - self.last_time if self.last_time else 0.1
+        dt = now - self.last_time
         self.last_time = now
 
         self.integral += error * dt
@@ -125,98 +122,62 @@ class PID:
         return self.kp * error + self.ki * self.integral + self.kd * derivative
 
 
-class BlueboatPIDNode(Node):
+class SimplePIDNode(Node):
     def __init__(self):
-        super().__init__('blueboat_pid_regler')
+        super().__init__('simple_blueboat_pid')
 
-        # Zielposition
-        self.goal = [0.0, 0.0]  # initiales Ziel
-        # PID-Regler initialisieren
-        self.heading_pid = PID(kp=3.0, ki=0.0, kd=0.4)
-        self.speed_pid = PID(kp=0.1, ki=0.0, kd=0.8)
+        self.goal = [3.0, 2.0]  # Feste Zielkoordinate
 
-        # MAVLink-Verbindung
+        # PID-Regler
+        self.heading_pid = PID(3.0, 0.0, 0.3)
+        self.speed_pid = PID(0.2, 0.0, 0.5)
+
+        # MAVLink Verbindung aufbauen
         self.master = mavutil.mavlink_connection('udp:127.0.0.1:14550')
         self.master.wait_heartbeat()
-        self.get_logger().info("Mit MAVLink verbunden")
+        self.get_logger().info("Verbunden mit MAVLink")
 
-        # Odometrie abonnieren
+        # ROS Subscriber
         self.create_subscription(Odometry, '/model/blueboat/odometry', self.odom_callback, 10)
-        
-        self.target_service = self.create_service(SetTarget, 'set_target', self.set_target_callback)
-        # Publisher für Ziel-Erreichung
-        self.target_reached_pub = self.create_publisher(Bool, '/target_reached', 10)
-        self.goal_reached = False  # merken, ob schon gemeldet
-
-    def set_target_callback(self, request, response):
-        self.goal = [request.x, request.y]
-        self.get_logger().info(f"Neues Ziel empfangen: x={request.x}, y={request.y}")
-        self.goal_reached = False  # zurücksetzen!
-        response.accepted = True
-        time.sleep(5)
-        self.get_logger().info("...abgeschlossen.")
-        return response
 
     def odom_callback(self, msg):
         pos = msg.pose.pose.position
         yaw = self.get_yaw(msg.pose.pose.orientation)
 
-        distance, heading_error = self.compute_control_errors(pos.x, pos.y, yaw)
-        speed_cmd = self.compute_speed_cmd(distance, heading_error)
-        steer_cmd = self.compute_steer_cmd(heading_error)
-
-        pwm_left, pwm_right = self.compute_motor_pwms(speed_cmd, steer_cmd)
-
-        self.send_pwm(pwm_left, pwm_right)
-        #Zielerreichung publizieren (nur einaml)
-        if distance < 0.3 and not self.goal_reached:
-            self.goal_reached = True
-            self.target_reached_pub.publish(Bool(data=True))
-            self.get_logger().info("Ziel erreicht -> Nachricht gesendet")
-
-        # Ausgabe der aktuellen Werte
-
-        #self.get_logger().info(f"BootPos: x={pos.x:.2f}, y={pos.y:.2f}, yaw={math.degrees(yaw):.1f}°")
-        self.get_logger().info(f"Distanz: {distance:.2f} m | Heading_Fehler: {math.degrees(heading_error):.1f}°")
-        #self.get_logger().info(f"PWM Left: {pwm_left}, PWM Right: {pwm_right}")
-
-    def compute_control_errors(self, x, y, yaw):
-        dx = self.goal[0] - x
-        dy = self.goal[1] - y
+        dx = self.goal[0] - pos.x
+        dy = self.goal[1] - pos.y
         distance = math.hypot(dx, dy)
+
         target_angle = math.atan2(dy, dx)
         heading_error = (target_angle - yaw + math.pi) % (2 * math.pi) - math.pi
-        return distance, heading_error
 
-    def compute_speed_cmd(self, distance, heading_error):
-        if distance < 0.1:
-            self.speed_pid.integral = 0.0
-            return -0.2  # leicht rückwärts zum Bremsen
-        if distance > 0.3 and abs(heading_error) > math.radians(90):
-            return 0.0  # auf der Stelle drehen
-        return max(min(-self.speed_pid.update(distance), 1.0), -0.5)
+        steer_cmd = self.heading_pid.compute(heading_error)
+        speed_cmd = self.speed_pid.compute(distance)
 
-    def compute_steer_cmd(self, heading_error):
-        steer = self.heading_pid.update(heading_error)
-        return max(min(steer, 1.0), -1.0)
+        # Ziel erreicht?
+        if distance < 0.3:
+            speed_cmd = -0.2  # leicht rückwärts bremsen
 
+        pwm_left, pwm_right = self.compute_pwm(speed_cmd, steer_cmd)
+        self.send_pwm(pwm_left, pwm_right)
 
-    def compute_motor_pwms(self, speed_cmd, steer_cmd):
+        self.get_logger().info(f"Distanz: {distance:.2f} m | Heading Error: {math.degrees(heading_error):.1f}°")
+
+    def compute_pwm(self, speed_cmd, steer_cmd):
         base_pwm = 1500
-        power = int(400 * speed_cmd)
-        turn = int(400 * steer_cmd)
-        left = max(min(base_pwm - power - turn, 1900), 1100)
-        right = max(min(base_pwm - power + turn, 1900), 1100)
-        return left, right
+        power = int(400 * max(min(speed_cmd, 1.0), -1.0))
+        turn = int(400 * max(min(steer_cmd, 1.0), -1.0))
 
-    def send_pwm(self, pwm_left, pwm_right):
+        pwm_left = max(min(base_pwm - power - turn, 1900), 1100)
+        pwm_right = max(min(base_pwm - power + turn, 1900), 1100)
+        return pwm_left, pwm_right
+
+    def send_pwm(self, left, right):
         self.master.mav.rc_channels_override_send(
             self.master.target_system,
             self.master.target_component,
-            pwm_left, 0, pwm_right, 0,
-            0,# CH5
-            0, # CH6
-            0, 0
+            left, 0, right, 0,
+            0, 0, 0, 0
         )
 
     def get_yaw(self, q):
@@ -227,7 +188,7 @@ class BlueboatPIDNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = BlueboatPIDNode()
+    node = SimplePIDNode()
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
@@ -235,5 +196,57 @@ def main(args=None):
     finally:
         node.destroy_node()
         rclpy.shutdown()
-        
+
 ```
+
+<details>
+<summary>Explanation of the simple BlueBoat PID Node</summary>
+
+This minimal ROS 2 node drives the simulated BlueBoat toward a **fixed target position** using a basic PID controller for both heading and speed.
+
+---
+
+### 🚦 What this Node Does
+
+- Subscribes to the boat's **odometry** in simulation
+- Computes the **distance** and **heading angle** to the fixed target
+- Uses **PID control** to calculate motor signals
+- Sends **PWM commands via MAVLink** to steer and drive the boat
+
+---
+
+### 🧠 Core Concepts
+
+| Component | Purpose |
+|----------|---------|
+| `PID` class | Calculates control output using proportional, integral, and derivative parts |
+| `odom_callback()` | Reacts to new position data from Gazebo |
+| `compute_pwm()` | Converts speed and steering into left/right motor commands |
+| `send_pwm()` | Sends motor signals directly via MAVLink |
+| `get_yaw()` | Extracts boat orientation from quaternion |
+
+---
+
+### 🔁 Control Logic
+
+1. Compute distance and heading error to the target  
+2. Use two PID controllers:
+   - One for **heading correction**
+   - One for **speed adjustment**
+3. Translate results into PWM values
+4. Command motors via MAVLink
+
+---
+
+### 🎯 Fixed Goal
+
+The goal is defined statically in the code:
+
+```python
+self.goal = [3.0, 2.0]
+```
+</details>
+
+---
+
+# Next Steps
