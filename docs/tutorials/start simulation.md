@@ -23,17 +23,26 @@ After cloning the simulation repository and building the Docker image, you can s
 Navigate into the Docker folder and adjust these lines in run.sh
 
 ```bash
-local_gz_ws="/home/markus/blueboat_ardupilot_SITL/gz_ws"
-local_SITL_Models="/home/markus/blueboat_ardupilot_SITL/SITL_Models"
+local_gz_ws="/home/Lennart/blueboat_ardupilot_SITL/gz_ws"
+local_SITL_Models="/home/Lennart/blueboat_ardupilot_SITL/SITL_Models"
 ```
-Now run the container:
+to your specific path:
+```bash
+local_gz_ws="/YOURPATH/Summer_School/blueboat_ardupilot_SITL/gz_ws"
+local_SITL_Models="/YOURPATH/Summer_School/blueboat_ardupilot_SITL/SITL_Models"
+```
 
+Now open a terminal and run the container:
+#### 1. Go to the Docker folder:
 ```bash
 cd gazebosim_blueboat_ardupilot_sitl/blueboat_sitl/docker
+```
+#### 2. Start the container:
+```bash
 sudo ./run.sh
 ```
 
-This will launch an Ubuntu-based Docker container with all required dependencies for running the BlueBoat simulation.
+This will launch an Ubuntu-based Docker container with all required dependencies and libraries for running the BlueBoat simulation.
 
 Once inside the container, you’ll have access to all simulation and ROS 2 tools pre-installed.
 
@@ -65,7 +74,7 @@ source install/setup.bash
 ```
 
 ### 3. Change the directory
-Go to the directory "gz_ws". The pre command "../" will 
+Go to the directory "gz_ws". (The pre command "../" will go one file level up)
 ```bash
 cd ../gz_ws
 ```
@@ -108,7 +117,7 @@ ros2 launch move_blueboat launch_robot_simulation.launch.py
 
 ## Step 5 - Run SITL (Software in the Loop)
 
-tart a new terminal and enter the running docker container
+Start a new terminal and enter the running docker container (doesn't matter where do you open your terminal): 
 ```bash
 sudo docker exec -it blueboat_sitl /bin/bash
 ```
