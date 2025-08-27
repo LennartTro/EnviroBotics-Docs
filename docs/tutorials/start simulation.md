@@ -113,6 +113,8 @@ And launch the gazebo simulation:
 ```bash
 ros2 launch move_blueboat launch_robot_simulation.launch.py
 ```
+Now you should see the Gazebo simulation with some physical models for water and our BlueBoat. If you look exactly you will see how the Boat is moving.(To reduce the requirements for graphics we replaced the rendered water surface with a flat plane. However, a wave model runs in the background.)
+<img src="/EnviroBotics-Docs/img/Gazebo.png" alt="Concept Overview" style={{ width: '100%', marginBottom: '1rem' }} />
 
 ---
 
@@ -130,7 +132,7 @@ Run:
 ```bash
 sim_vehicle.py -v Rover -f gazebo-rover --model JSON --map --console -l 48.214611,11.720278,0,0
 ```
-
+Here the ....
 ---
 
 ## Summary
