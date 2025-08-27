@@ -10,17 +10,13 @@ title: Install QGroundControl
 ```bash
 # Update package index
 sudo apt update
+#Enable serial-port access Add your user to the dialout group so you can talk to USB devices without root:
+sudo usermod -aG dialout "$(id -un)"
 
 # Install required dependencies
-sudo apt install gstreamer1.0-plugins-base \
-                 gstreamer1.0-plugins-good \
-                 gstreamer1.0-plugins-bad \
-                 gstreamer1.0-plugins-ugly \
-                 gstreamer1.0-libav \
-                 gstreamer1.0-tools \
-                 gstreamer1.0-x \
-                 gstreamer1.0-pulseaudio \
-                 libqt5serialport5
+sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
+sudo apt install libfuse2 -y
+sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor-dev -y
 
 # Download QGroundControl AppImage
 wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
@@ -34,10 +30,13 @@ chmod +x QGroundControl.AppImage
 ```
 
 ## Install QGroundControl on Windows
+1. Download QGroundControl-x86_64.AppImage.
 
-1. Go to the official download page:
-     👉 [QGroundControl](https://www.qgroundcontrol.com/)
-2. Download the Windows Installer (.msi)
-3. Run the installer and follow the setup instructions.
-4. Launch QGroundControl from the Start Menu.
-> Ensure your vehicle is connected via USB or telemetry (UDP, TCP, or serial) so it can be detected by QGroundControl.
+2. Make the AppImage executable:
+```bash 
+chmod +x QGroundControl-<arch>.AppImage
+```
+Run QGroundControl Either double-click the AppImage in your file manager or launch it from a terminal:
+```bash
+./QGroundControl-<arch>.AppImage
+```

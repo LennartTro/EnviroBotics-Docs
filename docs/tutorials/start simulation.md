@@ -20,7 +20,8 @@ Make sure you have a working Docker installation and QGroundControl for mission 
 After cloning the simulation repository and building the Docker image, you can start the container.
 
 
-Navigate into the Docker folder and adjust these lines in run.sh
+Navigate into the Docker folder in the 
+and adjust these lines in run.sh:
 
 ```bash
 local_gz_ws="/home/Lennart/blueboat_ardupilot_SITL/gz_ws"
