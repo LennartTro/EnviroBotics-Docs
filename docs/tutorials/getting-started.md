@@ -15,7 +15,7 @@ cd Summer_School
 
 ## Clone the repository 
 
-Please check, that you are inside the 
+Please check, that you are inside the Summer_School folder and clone the repository:
 ```bash
 git clone https://github.com/tum-erl/gazebosim_blueboat_ardupilot_sitl
 ```
@@ -54,13 +54,15 @@ Go to the docker folder:
 ```bash
 cd /gazebosim_blueboat_ardupilot_sitl/blueboat_sitl/docker
 ```
-and build the image:
+and build the docker image:
 ```bash
 sudo ./build.sh
 ```
 
 That may take some time. If it fails, please try building it again.
+
 ---
+
 ## Install QGroundControl
 
 1. Update your system and install dependencies: 
@@ -77,6 +79,7 @@ sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor-dev -y
 ```
 2. Download QGroundControl-x86_64.AppImage - [by clicking here](https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl-x86_64.AppImage)
 3. Create a new folder "QGroundControl" inside the Summer_School folder and put the QGroundControl-x86_64.AppImage from your download folder to you that folder (drag and drop or copy and past)
+
 Your file system should look like this:
 ```text
 home/
@@ -105,17 +108,19 @@ home/
 ```
 
 3. Make the AppImage executable:
+Either run this command inside the QGRoundControl folder
 ```bash 
 chmod +x QGroundControl-<arch>.AppImage
 ```
-or so a right-click an the icon --> select properties and change the slider "Executable as Program"
+or do a right-click an the icon --> select properties and change the slider "Executable as Program"
 
 4. Run QGroundControl Either double-click the AppImage in your file manager or launch it from a terminal:
 ```bash
 ./QGroundControl-<arch>.AppImage
 ```
-and here you are:
-<img src="/EnviroBotics-Docs/img/QGroundControls.png" alt="Concept Overview" style={{ width: '100%', marginBottom: '1rem' }} />
+and here you are (or somewhere else on the map):
+
+<img src="/EnviroBotics-Docs/img/QGroundControl.png" alt="getting started" style={{ width: '100%', marginBottom: '1rem' }} />
 
 
 ---
