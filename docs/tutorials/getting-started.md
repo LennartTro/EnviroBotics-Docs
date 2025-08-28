@@ -23,24 +23,24 @@ Now you should have a file structure like that:
 
 ```text
 home/
-├── Summer_School
-│   └── gazebosim_blueboat_ardupilot_sitl
-|          |── blueboat_sitl
-|          |       |── docker
+├── Summer_School/
+│   └── gazebosim_blueboat_ardupilot_sitl/
+|          |── blueboat_sitl/
+|          |       |── docker/
 |          |       |     |──  run.sh
 |          |       |     |──  build.sh
 |          |       |     └──  Dockerfile
 |          |       |──  ...
 |          |       └── ...
-|          |── gz_ws
-|          |    |── src
+|          |── gz_ws/
+|          |    |── src/
 |          |    |    |── "NODES"
 |          |    |    └── ...
-|          |    |── (install)
-|          |    |── (build)
+|          |    |── (install/)
+|          |    |── (build/)
 |          |    └── ...
 |          |       
-|          |──  SITL_Models
+|          |──  SITL_Models/
 |          └── README.md
 |   
 └── ...
@@ -84,25 +84,25 @@ Your file system should look like this:
 ```text
 home/
 ├── Summer_School
-│   |── gazebosim_blueboat_ardupilot_sitl
-|   |       |── blueboat_sitl
+│   |── gazebosim_blueboat_ardupilot_sitl/
+|   |       |── blueboat_sitl/
 |   |       |       |── docker
 |   |       |       |     |──  run.sh
 |   |       |       |     |──  build.sh
 |   |       |       |     └──  Dockerfile
 |   |       |       |──  ...
 |   |       |       └── ...
-|   |       |── gz_ws
-|   |       |    |── src
+|   |       |── gz_ws/
+|   |       |    |── src/
 |   |       |    |    |── "NODES"
 |   |       |    |    └── ...
-|   |       |    |── (install)
-|   |       |    |── (build)
+|   |       |    |── (install/)
+|   |       |    |── (build/)
 |   |       |    └── ...
 |   |       |       
-|   |       |──  SITL_Models
+|   |       |──  SITL_Models/
 |   |       └── README.md
-|   └── QGroundControl
+|   └── QGroundControl/
 |        └── QGroundControl-x86_64.Appl...
 └── ...
 ```

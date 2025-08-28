@@ -9,8 +9,8 @@ title: Build your own ROS nodes
 To control the BlueBoat in the simulation (e.g., moving it to a certain position), you’ll typically write **custom ROS 2 nodes**. These nodes allow you to subscribe to sensor data, process it (e.g., with a control algorithm), and publish commands to actuators.
 
 ---
-
-## 1 What is a ROS 2 node?
+## What is what?
+### What is a ROS 2 node?
 
 A **ROS 2 node** is a single, executable program in a distributed robotic system that communicates with other nodes using topics, services, or actions.
 
@@ -23,66 +23,114 @@ Each node can:
 
 Nodes are usually written in **Python** or **C++**. For simplicity, we will use **Python** in our Summer School.
 
----
-## 2 Build your own nodes
-### 1 Structure of a Simple Node (Python)
 
-Below is a minimal ROS 2 node in Python that logs a message once per second.
+### What is a ROS 2 Package?
 
-```python
-# my_node.py
-import rclpy
-from rclpy.node import Node
+A ROS 2 package is the basic unit of software in the ROS 2 ecosystem. It acts as a container for related code, such as:
+- One or more nodes
+- Message or service definitions
+- Configuration files (e.g., launch, params)
+- Metadata (setup.py, package.xml)
 
-class MyNode(Node):
-    def __init__(self):
-        super().__init__('my_node')
-        self.create_timer(1.0, self.timer_callback)
+Think of it as a folder that bundles everything you need to build, run, and share a ROS-based component. A node needs to be **inside a package** to be usable with ROS tools like `ros2 run`.
 
-    def timer_callback(self):
-        self.get_logger().info('Hello from my_node!')
+### How does a package relate to nodes?
 
-def main(args=None):
-    rclpy.init(args=args)
-    node = MyNode()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+A node is an executable Python (or C++) script.
 
-```
+A package provides the environment to organize, build, and install that node.
 
-To run this, place the file inside a ROS 2 Python package.
+When you run ros2 run my_package my_node, ROS looks inside the package to find and execute the node.
 
 ---
 
-### 2 Creating a ROS 2 Python Package
+## 2 Step-by-Step: From Python File to Executable Node
 
-To create your own package for BlueBoat control, go to the src Directory:
+### Step 1 – Create a Python Package
+
+Open a terminal in your workspace's `src` folder:
+
 ```bash
-
 cd ~/ros2_ws/src
-
+ros2 pkg create --build-type ament_python blueboat_controller
 ```
 
-and run:
+That creates:
+
+```text
+blueboat_controller/
+├── blueboat_controller/
+|       └── __init__.py 
+├── package.xml
+├── setup.py
+└── resource/
+
+```
+### Step 2 – Add Your Node Script
+
+Create your Python file in the inner blueboat_controller/ directory:
+```bash
+touch blueboat_controller/blueboat_controller/pid_controller.py
+```
+Paste your ROS 2 node code here (e.g., a simple PID controller).
+Make sure the first line of the script is:
+```python
+#!/usr/bin/env python3
+```
+Also, don’t forget to make the script executable:
+```bash
+chmod +x blueboat_controller/blueboat_controller/pid_controller.py
+```
+Or do an right-click on the file pid_controller.py --> Properties....
+
+### Step 3 – Update setup.py
+
+Open the generated setup.py and modify it like this:
+```python {20}
+from setuptools import setup
+
+package_name = 'blueboat_controller'
+
+setup(
+    name=package_name,
+    version='0.1.0',
+    packages=[package_name],
+    data_files=[
+        ('share/' + package_name, ['package.xml']),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='Your Name',
+    maintainer_email='your@email.com',
+    description='Custom controller node for BlueBoat',
+    license='MIT',
+    entry_points={
+        'console_scripts': [
+            'pid_controller = blueboat_controller.pid_controller:main',
+        ],
+    },
+)
+
+```
+The entry in console_scripts allows ROS 2 to run the node with:
 
 ```bash
-
-ros2 pkg create --build-type ament_python blueboat_controller
-
+ros2 run blueboat_controller pid_controller
 ```
 
-Then add your Python node (e.g., pid_controller.py) to the blueboat_controller/blueboat_controller directory and update setup.py to install it.
+But first build...
 
----
-
-### 3 Building and Running your node
+### Step 4 – Building and Running your node
 Build:
 ```bash
 cd ~/ros2_ws
 colcon build
+```
+After building, always source your workspace:
+```bash
 source install/setup.bash
 ```
+
 and run:
 ```bash
 
@@ -91,7 +139,7 @@ ros2 run blueboat_controller pid_controller
 ```
 This will start your custom node.
 
-### 4 Customize your node:
+### Customize your node:
 ``` python
 #!/usr/bin/env python3
 
