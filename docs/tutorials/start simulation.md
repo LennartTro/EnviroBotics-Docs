@@ -20,9 +20,23 @@ Make sure you have a working Docker installation and QGroundControl for mission 
 After cloning the simulation repository and building the Docker image, you can start the container.
 
 
-Navigate into the Docker folder in the 
-and adjust these lines in run.sh:
+But first navigate into the Docker folder in the:
 
+```text {6}
+home/
+├── Summer_School
+│   |── gazebosim_blueboat_ardupilot_sitl/
+|   |       |── blueboat_sitl/
+|   |       |       |── docker
+|   |       |       |     |──  run.sh
+|   |       |       |     |──  build.sh
+|   |       |       |     └──  Dockerfile
+|   |       |       └──...
+|   |       └──...
+|   └──...  
+└──...
+```
+and adjust these lines in run.sh:
 ```bash
 local_gz_ws="/home/Lennart/blueboat_ardupilot_SITL/gz_ws"
 local_SITL_Models="/home/Lennart/blueboat_ardupilot_SITL/SITL_Models"
@@ -32,8 +46,9 @@ to your specific path:
 local_gz_ws="/YOURPATH/Summer_School/blueboat_ardupilot_SITL/gz_ws"
 local_SITL_Models="/YOURPATH/Summer_School/blueboat_ardupilot_SITL/SITL_Models"
 ```
+(You can open it with Visual Studio Code, for example, to adjust the lines)
 
-Now open a terminal and run the container:
+### Now open a terminal and run the container:
 #### 1. Go to the Docker folder:
 ```bash
 cd gazebosim_blueboat_ardupilot_sitl/blueboat_sitl/docker
@@ -115,14 +130,14 @@ source install/setup.bash
 source gazebo_exports.sh
 ```
 
-Now you should see the Gazebo simulation with some physical models for water and our BlueBoat. If you look exactly you will see how the Boat is moving.(To reduce the requirements for graphics we replaced the rendered water surface with a flat plane. However, a wave model runs in the background.)
+Now you should see the Gazebo simulation with some physical models for water and our BlueBoat. If you look exactly you will see how the Boat is moving. To reduce the requirements for graphics we replaced the rendered water surface with a flat plane. However, a wave model runs in the background.
 <img src="/EnviroBotics-Docs/img/Gazebo.png" alt="Concept Overview" style={{ width: '100%', marginBottom: '1rem' }} />
 
 ---
 
 ## Step 5 - Run SITL (Software in the Loop)
 
-Start a new terminal and enter the running docker container (doesn't matter where you open your terminal): 
+Start a new terminal and enter the running docker container. It doesn't matter where you open your terminal: 
 ```bash
 sudo docker exec -it blueboat_sitl /bin/bash
 ```
@@ -134,7 +149,7 @@ Run:
 ```bash
 sim_vehicle.py -v Rover -f gazebo-rover --model JSON --map --console -l 48.214611,11.720278,0,0
 ```
-Here the ....(klappbar Erklärung was ist sitl...hitl...). After a few seconds your QGroundCrontrol is connected to a "virtual" BlueBoat swimming on Speichersee
+After a few seconds your QGroundCrontrol is connected to a "virtual" BlueBoat swimming on Speichersee. That is were the GPS Position 48.214611 N and 11.720278 W leads us.
 
 <img src="/EnviroBotics-Docs/img/Ardupilot_Speichersee.png" alt="starting simulation" style={{ width: '100%', marginBottom: '1rem' }} />
 
@@ -177,19 +192,23 @@ Benefits of HITL:
 
 Make sure, that the behavior of your simulated Boat is similar to a real BlueBoat  
 
-### 1. Click on the Q in the left upper corner:
 
-<img src="/EnviroBotics-Docs/img/QGC_1.png" alt="starting simulation" style={{ width: '100%', marginBottom: '1rem' }} />
+<div style={{ display: 'flex', gap: '1rem', justifyContent: 'space-between', flexWrap: 'wrap' }}>
 
-### 2. Select Vehicle Setup:
+  <div style={{ flex: '1 1 48%' }}>
+    <h4>1. Click on the Q in the left upper corner:</h4>
+    <img src="/EnviroBotics-Docs/img/QGC_1.png" alt="QGC Step 1" style={{ width: '100%', borderRadius: '8px' }} />
+  </div>
 
-<img src="/EnviroBotics-Docs/img/QGC_2.png" alt="starting simulation" style={{ width: '100%', marginBottom: '1rem' }} />
+  <div style={{ flex: '1 1 48%' }}>
+    <h4>2. Go to Frame and select Boat instead of Rover:</h4>
+    <img src="/EnviroBotics-Docs/img/QGC_3.png"  alt="QGC Step 2" style={{ width: '100%', borderRadius: '8px' }} />
+  </div>
 
-### 3. Go to Frame and select Boat instead of Rover:
+</div>
 
-<img src="/EnviroBotics-Docs/img/QGC_3.png" alt="starting simulation" style={{ width: '100%', marginBottom: '1rem' }} />
 
-### 3. Go further to Parameters and search for steer_type:
+#### 4. Go further to Parameters and search for steer_type:
 Choose "Two Paddles Input" in the Parameter Editor and save. This is important because the BlueBoat steers with its two propellers and not with a fin. 
 
 <img src="/EnviroBotics-Docs/img/QGC_4.png" alt="starting simulation" style={{ width: '100%', marginBottom: '1rem' }} />
@@ -198,4 +217,4 @@ Go back by clicking on the left upper corner.
 
 ## Summary
 
-You're now ready to explore the BlueBoat simulation. You can modify ROS 2 nodes, interact with sensors, plan missions, and experiment with algorithms in a realistic simulated environment.
+You're now ready to explore the BlueBoat simulation. You can modify ROS 2 nodes, interact with sensors, plan missions, and experiment with algorithms in a realistic simulated environment - that is all part of the following section.

@@ -50,7 +50,7 @@ home/
 ---
 
 ## Build a Docker Image
-Go to the docker folder:
+Navigate to the docker folder:
 ```bash
 cd /gazebosim_blueboat_ardupilot_sitl/blueboat_sitl/docker
 ```
@@ -71,7 +71,8 @@ That may take some time. If it fails, please try building it again.
 sudo apt update
 #Enable serial-port access Add your user to the dialout group so you can talk to USB devices without root:
 sudo usermod -aG dialout "$(id -un)"
-
+```
+```bash
 # Install required dependencies
 sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
 sudo apt install libfuse2 -y

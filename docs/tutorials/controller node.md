@@ -298,7 +298,7 @@ This means:
         response.accepted = True
         return response
     ```
-### 📬 Summary
+### Summary
 
 
 | Part             | Purpose                                                    |
