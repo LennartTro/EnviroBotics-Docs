@@ -15,12 +15,16 @@ Here are two recommended installation methods to get VS Code running on Ubuntu.
 # Download the latest .deb package from Microsoft (example link)
 wget -O ~/vscode.deb https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64
 # Alternatively, download manually via your browser
+```
 
+```bash
 # Install the package
 sudo apt install ~/vscode.deb
 # Fix any missing dependencies
 sudo apt --fix-broken install
+```
 
+```bash
 # Launch VS Code
 code --version
 ```

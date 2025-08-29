@@ -40,7 +40,7 @@ GIT_USER=<Your GitHub username> yarn deploy
 
 If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
 
-### To run it locally yon can also use
+### To run it locally, yon can also use:
 
 ```bash
 npm run start
