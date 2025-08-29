@@ -22,6 +22,7 @@ To achieve this, we introduce a **planner node** whose role is to orchestrate th
 
 This decoupled design ensures modularity:
 The planner handles the **"what to do"**, and the controller takes care of **"how to get there"**.
+
 ---
 
 ## Create a new ROS 2 package
