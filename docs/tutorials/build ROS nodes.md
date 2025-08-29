@@ -48,14 +48,41 @@ When you run ros2 run my_package my_node, ROS looks inside the package to find a
 
 ### Step 1 – Create a Python Package
 
-Open a terminal in your workspace's `src` folder:
+Open a terminal in your workspace's `src` folder - we are working inside the Docker container in `gz_ws/` folder:
+
+```text {8}
+home/
+├── Summer_School
+│   |── gazebosim_blueboat_ardupilot_sitl/
+|   |       |── blueboat_sitl/
+|   |       |       |── ....
+|   |       |       └── ...
+|   |       |── gz_ws/
+|   |       |    |── src/
+|   |       |    |    |── "NODES"
+|   |       |    |    └── ...
+|   |       |    |── (install/)
+|   |       |    |── (build/)
+|   |       |    └── ...
+|   |       |──  SITL_Models/
+|   |       └── README.md
+|   └── ...
+└── ...
+```
+You can use this command to go there:
 
 ```bash
-cd ~/ros2_ws/src
+cd ~/gz_ws/src
+```
+Here you can create a ne Package with the name `blueboat_controller`:
+
+```bash
 ros2 pkg create --build-type ament_python blueboat_controller
 ```
 
-That creates:
+
+
+That will create the package structure inside you `src/`-folder:
 
 ```text
 blueboat_controller/
@@ -68,7 +95,7 @@ blueboat_controller/
 ```
 ### Step 2 – Add Your Node Script
 
-Create your Python file in the inner blueboat_controller/ directory:
+Create your own Python file in the `blueboat_controller/` directory:
 ```bash
 touch blueboat_controller/blueboat_controller/pid_controller.py
 ```
@@ -123,7 +150,7 @@ But first build...
 ### Step 4 – Building and Running your node
 Build:
 ```bash
-cd ~/ros2_ws
+cd ~/gz_ws
 colcon build
 ```
 After building, always source your workspace:
@@ -137,7 +164,7 @@ and run:
 ros2 run blueboat_controller pid_controller
 
 ```
-This will start your custom node.
+This will start your custom node. In this case all it does is...
 
 ### Customize your node:
 ``` python
@@ -246,6 +273,17 @@ def main(args=None):
         rclpy.shutdown()
 
 ```
+### And build again: 
+
+Build:
+```bash
+cd ~/gz_ws
+colcon build
+```
+After building, always source your workspace:
+```bash
+source install/setup.bash
+```
 
 <details>
 <summary>Explanation of the simple BlueBoat PID Node</summary>
@@ -297,4 +335,38 @@ self.goal = [3.0, 2.0]
 
 ---
 
+### See what your node does 
+
+With your new customized node, your BlueBoat is able to navigate to the goal ([3.0 , 2.0]) that you defined.
+To see what happens, watch your Gazebo simulation and run you node:
+
+```bash
+ros2 run blueboat_controller pid_controller
+
+```
+The Boat is approaching the destination and you get an output of values for distance and heading error in your terminal.
+
+<div style={{ display: 'flex', gap: '1rem', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+
+  <div style={{ flex: '1 1 48%' }}>
+    <h4>Gazebo simulation:</h4>
+    <img src="/EnviroBotics-Docs/img/Gazebo.png" alt="gazebo" style={{ width: '100%', borderRadius: '8px' }} />
+  </div>
+
+  <div style={{ flex: '1 1 48%' }}>
+    <h4>Terminal:</h4>
+    <img src="/EnviroBotics-Docs/img/QGC_3.png"  alt="terminal" style={{ width: '100%', borderRadius: '8px' }} />
+  </div>
+</div>
+
+---
+
+
 # Next Steps
+Your BlueBoat can now navigate to a fixed destination — great progress!
+
+But in a real-world scenario, we often want more:
+
+**Multiple waypoints, automated actions at each stop, and full mission control.**
+
+To make this possible, we’ll build a second node — a planner — that manages goal sequences and coordinates with your controller.

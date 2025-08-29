@@ -31,6 +31,11 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Project Workflow',
+      items: ['workflow/workflow'],
+    },
+    {
+      type: 'category',
       label: 'Installation and Setup',
       items: ['installation/Install Ubuntu',
               'installation/Install Docker',
@@ -50,13 +55,9 @@ const sidebars = {
               'tutorials/start simulation',
               'tutorials/build ROS nodes',
               'tutorials/controller node',
-              'tutorials/planner node'
+              'tutorials/planner node',
+              'tutorials/transition to hardware'
               ],
-    },
-    {
-      type: 'category',
-      label: 'Project Workflow',
-      items: ['workflow/workflow'],
     },
     {
       type: 'category',

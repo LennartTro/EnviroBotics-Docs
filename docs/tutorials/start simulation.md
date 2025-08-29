@@ -20,7 +20,7 @@ Make sure you have a working Docker installation and QGroundControl for mission 
 After cloning the simulation repository and building the Docker image, you can start the container.
 
 
-But first navigate into the Docker folder in the:
+But first navigate into the Docker folder:
 
 ```text {6}
 home/
@@ -48,7 +48,7 @@ local_SITL_Models="/YOURPATH/Summer_School/blueboat_ardupilot_SITL/SITL_Models"
 ```
 (You can open it with Visual Studio Code, for example, to adjust the lines)
 
-### Now open a terminal and run the container:
+### Now open a terminal to run the container:
 #### 1. Go to the Docker folder:
 ```bash
 cd gazebosim_blueboat_ardupilot_sitl/blueboat_sitl/docker
@@ -112,7 +112,7 @@ Just click on the icon in your QGroundControl folder. (You do not need the termi
 ---
 
 ## Step 4 - Run GazeboSim inside Docker
-Start a new terminal and enter the running docker container (doesn't matter where you open your terminal): 
+Start a new terminal and enter the running docker container. It doesn't matter where you open your terminal - with that command you will jump into the container you started before: 
 ```bash
 sudo docker exec -it blueboat_sitl /bin/bash
 ```
@@ -124,7 +124,7 @@ cd ../gz_ws
 ```bash
 ros2 launch move_blueboat launch_robot_simulation.launch.py
 ```
-But not without sourcing everything:
+But not without sourcing everything in the first place:
 ```bash
 source install/setup.bash
 source gazebo_exports.sh
@@ -153,7 +153,6 @@ After a few seconds your QGroundCrontrol is connected to a "virtual" BlueBoat sw
 
 <img src="/EnviroBotics-Docs/img/Ardupilot_Speichersee.png" alt="starting simulation" style={{ width: '100%', marginBottom: '1rem' }} />
 
----
 
 <details>
 
@@ -187,6 +186,8 @@ Benefits of HITL:
 
 
 </details>
+
+---
 
 ## Step 5 - Set up QGroundControl for your Boat
 
