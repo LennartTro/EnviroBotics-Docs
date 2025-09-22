@@ -87,6 +87,7 @@ Open the Grub configuration file (for editing this, you need to open with sudo)
 
 Open a new terminal: `Ctrl + Shift + T`
 
+and enter the term:
 ```bash
 sudo gedit /etc/default/grub
 ```
