@@ -51,7 +51,7 @@ local_SITL_Models="/YOURPATH/Summer_School/blueboat_ardupilot_SITL/SITL_Models"
 ### Now open a terminal to run the container:
 #### 1. Go to the Docker folder:
 ```bash
-cd gazebosim_blueboat_ardupilot_sitl/blueboat_sitl/docker
+cd ./gazebosim_blueboat_ardupilot_sitl/blueboat_sitl/docker
 ```
 #### 2. Start the container:
 ```bash
@@ -78,7 +78,7 @@ Once you're inside the Docker container, you need to build the ROS 2 workspaces 
 Navigate to the BlueBoat workspace and build it:
 
 ```bash
-colcon build
+colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
 Source the installed file:
@@ -105,7 +105,7 @@ source gazebo_exports.sh
 
 ---
 
-## Step 3 – Start Start QGroundControl (outside Docker)
+## Step 3 – Start QGroundControl (outside Docker)
 
 Just click on the icon in your QGroundControl folder. (You do not need the terminal here)
 

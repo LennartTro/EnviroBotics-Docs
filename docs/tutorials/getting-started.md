@@ -52,7 +52,7 @@ home/
 ## Build a Docker Image
 Navigate to the docker folder:
 ```bash
-cd /gazebosim_blueboat_ardupilot_sitl/blueboat_sitl/docker
+cd ./gazebosim_blueboat_ardupilot_sitl/blueboat_sitl/docker
 ```
 and build the docker image:
 ```bash
