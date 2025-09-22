@@ -93,4 +93,4 @@ sudo update-alternatives --config x-terminal-emulator
 ```
 You’ll be prompted with a list — choose the number corresponding to Terminator.
 ## Test Terminator Setup
-Open a new pane: `Ctrl + Shift + T`
+Open a new terminal: `Ctrl + Shift + T`

@@ -38,7 +38,7 @@ Before installing Ubuntu, free up some space on your hard drive:
 
 ---
 
-### Step 4 Disable Secure Boot
+### Step 4 – Disable Secure Boot
 
 1. Reboot your system and enter your BIOS/UEFI during Bootup. To do so, you have to hit a certain key, depending on your hardware. For Dell commputers you probably need to hit F12 during the DELL splashscreen. For Lenovo, this key is Enter. This opens a dialog where you can choose to enter your BIOS settings.
 2. Find the settings to disable Secure Boot, save your changes and exit the BIOS/UEFI.
@@ -84,6 +84,8 @@ When booting, you will see the Grub menu. By default, Ubuntu is the first option
 While (hopefully!) you will spend a lot of time using Ubuntu this semester, the following explains how to change this back to Windows as the default.
 
 Open the Grub configuration file (for editing this, you need to open with sudo)
+
+Open a new terminal: `Ctrl + Shift + T`
 
 ```bash
 sudo gedit /etc/default/grub
