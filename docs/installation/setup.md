@@ -53,5 +53,5 @@ The “going-back-in-history” behaviour of our shell is quite convenient. It c
 Oh yeah, auto complete is a feature we should extensively make use of. With Tab we trigger the completion. If it can be performed because the completion is unambigious, it will be done. Otherwise we will immediately be provided with the available options. We can navigate through them with Tab and Shift + Tab. If there are many available options, they will be arranged in a table format. We can navigate to the desired completion directly with the arrow keys.
 
 :::note
-Tab is your best friend. Use it as often as possible. Never type anything by hand if you can do an auto comletion instead.
+Tab is your best friend. Use it as often as possible. Never type anything by hand if you can do an auto completion instead.
 :::

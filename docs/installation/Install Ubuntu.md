@@ -11,7 +11,8 @@ Since we are going to install a new/second operating system on your device, that
 :::
 
 :::note
-For those of you who have their windows encrypted with bitlocker you might have to enter your bitlocker key the next time you boot windows after you have installed Ubuntu. You should save your bitlocker key (you can find it here). Alternatively you can turn off bitlocker encryption.
+For those of you who have their windows encrypted with bitlocker you might have to enter your bitlocker key the next time you boot windows after you have installed Ubuntu. You should save your bitlocker key. Alternatively you can turn off bitlocker encryption.
+The link for the manual on how to find it can be found here: https://support.microsoft.com/en-au/windows/find-your-bitlocker-recovery-key-6b71ad27-0b89-ea08-f143-056f5ab347d6
 :::
 
 ### Step 1 – Download Ubuntu & Step 2 – Create a Bootable USB Stick (from Windows)
