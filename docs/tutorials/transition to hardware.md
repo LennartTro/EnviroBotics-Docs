@@ -111,7 +111,7 @@ If something goes wrong or you want to stop movement immediately, publish a stop
 ros2 topic pub -r 5 /asv/stop std_msgs/msg/Bool "data: true"
 
 ```
-to continue send: 
+to continue, send: 
 
 ```bash
 
