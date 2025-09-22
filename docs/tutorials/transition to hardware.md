@@ -99,7 +99,7 @@ ros2 run blueboat_control asv_pid_rc   --ros-args -p arrival_radius_m:=1.5      
 You can now send the boat to a specific location:
 
 ```bash
-ros2 topic pub -r 10 /asv/target geometry_msgs/msg/Point "{x: 48.28407529304395, y: 11.605825035798238, z: 0.0}"
+ros2 topic pub --once /asv/target geometry_msgs/msg/Point "{x: 48.28407529304395, y: 11.605825035798238, z: 0.0}"
 
 ```
 ## Stop the Mission
@@ -108,9 +108,17 @@ If something goes wrong or you want to stop movement immediately, publish a stop
 
 ```bash
 
-ros2 topic pub /asv/stop std_msgs/msg/Bool "data: true"
+ros2 topic pub -r 5 /asv/stop std_msgs/msg/Bool "data: true"
 
 ```
+to continue send: 
+
+```bash
+
+ros2 topic pub -r 5 /asv/stop std_msgs/msg/Bool "data: false"
+
+```
+
 ## Your controller is now live on the real BlueBoat hardware!
 
 Continue refining your system and testing it safely in controlled environments before heading out to the lake.
