@@ -278,7 +278,7 @@ def main(args=None):
 Build:
 ```bash
 cd ~/gz_ws
-colcon build
+colcon build --symlink-install --merge-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_TESTING=ON -DCMAKE_CXX_STANDARD=17"
 ```
 After building, always source your workspace:
 ```bash
@@ -337,6 +337,22 @@ self.goal = [3.0, 2.0]
 
 ### See what your node does 
 
+Before starting your ROS 2 node, make sure that the vehicle is armed in QGroundControl. Otherwise, your BlueBoat won’t respond to motor commands, even though your node is running correctly.
+
+✅ Arming the Vehicle in QGroundControl
+
+1 Open QGroundControl (QGC)
+
+2 Ensure it is connected to the simulated vehicle via MAVLink (Ready to Fly in the top bar) - click on "Ready to Fly"
+
+3 Click the "Arm" button (top left)
+
+3 Slide or hold the spacebar to confirm arming
+
+<div style={{ display: 'flex', gap: '1rem', justifyContent: 'space-between', flexWrap: 'wrap' }}> <div style={{ flex: '1 1 48%' }}> <img src="/EnviroBotics-Docs/img/Arming2.png" alt="QGroundControl arm slider" style={{ width: '100%', borderRadius: '8px' }} /> </div> <div style={{ flex: '1 1 48%' }}> <img src="/EnviroBotics-Docs/img/Arming1.png" alt="QGroundControl armed status" style={{ width: '100%', borderRadius: '8px' }} /> </div> </div>
+
+Once the vehicle is armed, run your Terminal and controller node:
+
 With your new customized node, your BlueBoat is able to navigate to the goal ([3.0 , 2.0]) that you defined.
 To see what happens, watch your Gazebo simulation and run you node:
 
@@ -355,7 +371,7 @@ The Boat is approaching the destination and you get an output of values for dist
 
   <div style={{ flex: '1 1 48%' }}>
     <h4>Terminal:</h4>
-    <img src="/EnviroBotics-Docs/img/QGC_3.png"  alt="terminal" style={{ width: '100%', borderRadius: '8px' }} />
+    <img src="/EnviroBotics-Docs/img/Terminal.png"  alt="terminal" style={{ width: '100%', borderRadius: '8px' }} />
   </div>
 </div>
 
