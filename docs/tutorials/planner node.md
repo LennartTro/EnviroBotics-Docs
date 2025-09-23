@@ -175,9 +175,8 @@ source install/setup.bash
 Then run the planner node (inside your Docker container):
 
 ```bash
-ros2 run blueboat_planner planner_node
+ros2 run blueboat_planner blueboat_planner
 ```
-
 ---
 
 ## How it Works
@@ -194,7 +193,13 @@ ros2 run blueboat_planner planner_node
 
 4. For each point, a visual marker is spawned in Gazebo.
 
+
+
+<img src="/EnviroBotics-Docs/img/Simulation.png" alt="palnner Node" style={{ width: '100%', marginBottom: '1rem' }} />
+
+
 ---
+
 
 ## Summary
 
