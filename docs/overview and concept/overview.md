@@ -11,7 +11,7 @@ Welcome to the **EnviroBotics Summer School**, where we mix code, creativity, an
 ---
 
 ## 📅 Day 1 – Let’s Get Virtual  
-**October 1, 2025**
+**October 1, 2025, from 1pm to approx 5pm**
 
 We kick off with an intensive intro session:  
 You’ll meet your digital toolbox – **Ubuntu**, **Docker**, **ROS**, and **Gazebo** – and quickly get your hands dirty (well, virtually).
@@ -30,7 +30,7 @@ Use a **PID controller** to make our [BlueBoat](https://bluerobotics.com/store/v
 ---
 
 ## 🛠 Days 2 & 3 – Build, Hack, Measure  
-**October 6–7, 2025**
+**October 6–7, 2025, from 10am to approx 5pm**
 
 Now things get real. You'll split into teams and transform a floating plastic boat into a fully autonomous **environmental researcher**.
 
@@ -45,7 +45,7 @@ This is hands-on robotics at its best. Sensors, scripts, teamwork, and a few cab
 ---
 
 ## 🌍 Day 4 – Showtime at the Lake  
-**October 10, 2025**  
+**October 10, 2025, from 10am**  
 **Location:** *Hollerner Lake*
 
 Time to launch.
