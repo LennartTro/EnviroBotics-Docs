@@ -191,7 +191,7 @@ ros2 run blueboat_planner blueboat_planner
 
     - The next target is sent.
 
-4. For each point, a visual marker is spawned in Gazebo.
+4. For each point, a visual marker is spawned in Gazebo (red dots).
 
 
 
