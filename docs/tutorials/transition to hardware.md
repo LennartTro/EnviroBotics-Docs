@@ -47,7 +47,8 @@ The process is similar to what you've done in simulation — just with real data
 ros2 run mavros mavros_node --ros-args -p fcu_url:=udp://@192.168.2.2:14600 -p system_id:=255 -p component_id:=190 -p tgt_system:=1 -p tgt_component:=1
 ```
 
-### Required (but actually already installed - so skippable): MAVROS
+:::note
+Required (but actually already installed - so skippable): MAVROS
 
 Make sure `mavros` and related dependencies are installed on your system:
 
@@ -64,7 +65,7 @@ sudo geographiclib-get-gravity egm2008
 sudo geographiclib-get-magnetic wmm2020
 
 ```
-
+:::
 - If the connection is successful, MAVROS will begin showing messages from the BlueBoat’s autopilot.
 
 
@@ -162,8 +163,9 @@ to continue, send:
 ros2 topic pub -r 5 /asv/stop std_msgs/msg/Bool "data: false"
 
 ```
-**note** With RC Override you are bypassing the autopilot regulator. You’re responsible for heading/speed control, failsafes, and tuning.
-
+:::note 
+With RC Override you are bypassing the autopilot regulator. You’re responsible for heading/speed control, failsafes, and tuning.
+:::
 
 ## Option B — Autopilot GUIDED mode (recommended)
 
@@ -182,8 +184,9 @@ ros2 topic pub -r 2 /mavros/setpoint_raw/global mavros_msgs/msg/GlobalPositionTa
   longitude: 11.606132,
   altitude: 0.0}"
 ```
-**note** Setpoints must be sent repeatedly (e.g., 2 Hz).
-
+:::note
+Setpoints must be sent repeatedly (e.g., 2 Hz).
+:::
 ## Your controller is now live on the real BlueBoat hardware!
 
 Continue refining your system and testing it safely in controlled environments before heading out to the lake.
