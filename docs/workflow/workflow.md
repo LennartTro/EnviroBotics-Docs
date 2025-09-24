@@ -62,7 +62,7 @@ Build and integrate your custom measurement device, e.g.,:
 
 Temperature winch system
 
-Additional sensors (e.g., GPS, IMU)
+(Additional sensors (e.g., GPS, IMU))
 
 Make sure data is collected, processed, and logged reliably via ROS 2.
 
