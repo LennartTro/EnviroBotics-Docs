@@ -20,18 +20,23 @@ The process is similar to what you've done in simulation — just with real data
 
 - Connect the BaseStation to your computer.
 
+ Please also pay attention to the notes and instructions on the official Blue Robotics pages:  
+- [BlueBoat Software Setup](https://bluerobotics.com/learn/blueboat-software-setup/)  
+- [BlueBoat Operator’s Guide](https://bluerobotics.com/learn/blueboat-operators-guide/)  
+
 ### Open the web interface
 
 - Launch your preferred web browser (Chrome, Firefox, Edge, etc.).
 
-- In the address bar, type 192.168.2.2 or blueos.local.
+- In the address bar, type **192.168.2.2** or **blueos.local**.
 
 ### Welcome to BlueOS
 
 - You will see the BlueOS home screen.
 
 - If the page does not load, check that the BaseStation is connected and powered, and that your computer is using the correct network.
-
+- You should see a **Heartbeat** coming in from the vehicle.  
+- If no heartbeat is detected, check cables, power supply, and endpoint configuration... or ask.  
 ---
 
 
@@ -183,6 +188,10 @@ ros2 topic pub -r 2 /mavros/setpoint_raw/global mavros_msgs/msg/GlobalPositionTa
   latitude: 48.284812,
   longitude: 11.606132,
   altitude: 0.0}"
+```
+```bash
+ros2 topic pub -r 2 /mavros/setpoint_position/global mavros_msgs/msg/GlobalPositionTarget \
+"{latitude: 48.284812, longitude: 11.606132, altitude: 0.0}"
 ```
 :::note
 Setpoints must be sent repeatedly (e.g., 2 Hz).

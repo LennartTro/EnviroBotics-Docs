@@ -183,11 +183,11 @@ class PID:
         self.kp, self.ki, self.kd = kp, ki, kd
         self.prev_error = 0.0
         self.integral = 0.0
-        self.last_time = time.time()
+        self.last_time = None
 
-    def compute(self, error):
+    def update(self, error):
         now = time.time()
-        dt = now - self.last_time
+        dt = now - self.last_time if self.last_time else 0.1
         self.last_time = now
 
         self.integral += error * dt
@@ -197,61 +197,77 @@ class PID:
         return self.kp * error + self.ki * self.integral + self.kd * derivative
 
 
-class SimplePIDNode(Node):
+class BlueboatPIDNode(Node):
     def __init__(self):
-        super().__init__('simple_blueboat_pid')
+        super().__init__('blueboat_pid_regler')
 
-        self.goal = [3.0, 2.0]  # Feste Zielkoordinate
+        # Festes Ziel (XY)
+        self.goal = [0.0, 0.0]
 
         # PID-Regler
-        self.heading_pid = PID(3.0, 0.0, 0.3)
-        self.speed_pid = PID(0.2, 0.0, 0.5)
+        self.heading_pid = PID(kp=3.0, ki=0.0, kd=0.4)
+        self.speed_pid = PID(kp=0.1, ki=0.0, kd=0.8)
 
-        # MAVLink Verbindung aufbauen
+        # MAVLink-Verbindung
         self.master = mavutil.mavlink_connection('udp:127.0.0.1:14550')
         self.master.wait_heartbeat()
-        self.get_logger().info("Verbunden mit MAVLink")
+        self.get_logger().info("Mit MAVLink verbunden - Modus: XY, Ziel=(0,0)")
 
-        # ROS Subscriber
+        # Odometrie abonnieren
         self.create_subscription(Odometry, '/model/blueboat/odometry', self.odom_callback, 10)
 
     def odom_callback(self, msg):
         pos = msg.pose.pose.position
         yaw = self.get_yaw(msg.pose.pose.orientation)
 
-        dx = self.goal[0] - pos.x
-        dy = self.goal[1] - pos.y
-        distance = math.hypot(dx, dy)
+        distance, heading_error = self.compute_control_errors(pos.x, pos.y, yaw)
 
-        target_angle = math.atan2(dy, dx)
-        heading_error = (target_angle - yaw + math.pi) % (2 * math.pi) - math.pi
+        speed_cmd = self.compute_speed_cmd(distance, heading_error)
+        steer_cmd = self.compute_steer_cmd(heading_error)
 
-        steer_cmd = self.heading_pid.compute(heading_error)
-        speed_cmd = self.speed_pid.compute(distance)
-
-        # Ziel erreicht?
-        if distance < 0.3:
-            speed_cmd = -0.2  # leicht rückwärts bremsen
-
-        pwm_left, pwm_right = self.compute_pwm(speed_cmd, steer_cmd)
+        pwm_left, pwm_right = self.compute_motor_pwms(speed_cmd, steer_cmd)
         self.send_pwm(pwm_left, pwm_right)
 
-        self.get_logger().info(f"Distanz: {distance:.2f} m | Heading Error: {math.degrees(heading_error):.1f}°")
+        # Kompaktes Logging
+        self.get_logger().info(
+            f"XY: x={pos.x:.2f}, y={pos.y:.2f}, yaw={math.degrees(yaw):.1f}° | "
+            f"Distanz: {distance:.2f} m | Heading-Error: {math.degrees(heading_error):.1f}° | "
+            f"PWM L/R: {pwm_left}/{pwm_right}"
+        )
 
-    def compute_pwm(self, speed_cmd, steer_cmd):
+    def compute_control_errors(self, x, y, yaw):
+        dx = self.goal[0] - x
+        dy = self.goal[1] - y
+        distance = math.hypot(dx, dy)
+        target_angle = math.atan2(dy, dx) if distance > 1e-6 else yaw
+        heading_error = (target_angle - yaw + math.pi) % (2 * math.pi) - math.pi
+        return distance, heading_error
+
+    def compute_speed_cmd(self, distance, heading_error):
+        if distance < 0.1:
+            self.speed_pid.integral = 0.0
+            return -0.2  # leicht rückwärts zum Bremsen
+        if distance > 0.3 and abs(heading_error) > math.radians(90):
+            return 0.0  # auf der Stelle drehen
+        return max(min(-self.speed_pid.update(distance), 1.0), -0.5)
+
+    def compute_steer_cmd(self, heading_error):
+        steer = self.heading_pid.update(heading_error)
+        return max(min(steer, 1.0), -1.0)
+
+    def compute_motor_pwms(self, speed_cmd, steer_cmd):
         base_pwm = 1500
-        power = int(400 * max(min(speed_cmd, 1.0), -1.0))
-        turn = int(400 * max(min(steer_cmd, 1.0), -1.0))
+        power = int(400 * speed_cmd)
+        turn = int(400 * steer_cmd)
+        left = max(min(base_pwm - power - turn, 1900), 1100)
+        right = max(min(base_pwm - power + turn, 1900), 1100)
+        return left, right
 
-        pwm_left = max(min(base_pwm - power - turn, 1900), 1100)
-        pwm_right = max(min(base_pwm - power + turn, 1900), 1100)
-        return pwm_left, pwm_right
-
-    def send_pwm(self, left, right):
+    def send_pwm(self, pwm_left, pwm_right):
         self.master.mav.rc_channels_override_send(
             self.master.target_system,
             self.master.target_component,
-            left, 0, right, 0,
+            pwm_left, 0, pwm_right, 0,
             0, 0, 0, 0
         )
 
@@ -263,7 +279,7 @@ class SimplePIDNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = SimplePIDNode()
+    node = BlueboatPIDNode()
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
@@ -271,6 +287,7 @@ def main(args=None):
     finally:
         node.destroy_node()
         rclpy.shutdown()
+
 
 ```
 ### And build again: 
