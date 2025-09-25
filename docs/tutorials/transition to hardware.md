@@ -198,4 +198,7 @@ Setpoints must be sent repeatedly (e.g., 2 Hz).
 :::
 ## Your controller is now live on the real BlueBoat hardware!
 
+
+
 Continue refining your system and testing it safely in controlled environments before heading out to the lake.
+Next step: Build a control node and a planner node to approach different positions, start measurements at each point, and publish the temperature.
