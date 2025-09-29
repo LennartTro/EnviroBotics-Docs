@@ -64,11 +64,6 @@ const sidebars = {
       label: 'Troubleshooting',
       items: ['troubleshooting/common-issues'],
     },
-    {
-      type: 'category',
-      label: 'Appendix',
-      items: ['appendix/faq'],
-    },
   ],
 };
 
