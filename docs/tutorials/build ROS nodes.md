@@ -164,7 +164,7 @@ and run:
 ros2 run blueboat_controller pid_controller
 
 ```
-This will start your custom node. In this case all it does is...
+This will start your custom node. In this case all it does is...nothing - is has no attribute 'main'
 
 ### Customize your node:
 ``` python
