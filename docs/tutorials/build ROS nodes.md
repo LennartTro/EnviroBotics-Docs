@@ -151,7 +151,7 @@ But first build...
 Build:
 ```bash
 cd ~/gz_ws
-colcon build --symlink-install --merge-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_TESTING=ON -DCMAKE_CXX_STANDARD=17"
+colcon build --symlink-install --merge-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_TESTING=ON -DCMAKE_CXX_STANDARD=17
 ```
 After building, always source your workspace:
 ```bash
@@ -295,7 +295,7 @@ def main(args=None):
 Build:
 ```bash
 cd ~/gz_ws
-colcon build --symlink-install --merge-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_TESTING=ON -DCMAKE_CXX_STANDARD=17"
+colcon build --symlink-install --merge-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_TESTING=ON -DCMAKE_CXX_STANDARD=17
 ```
 After building, always source your workspace:
 ```bash
