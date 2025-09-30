@@ -1,9 +1,9 @@
 ---
 id: planner node
-title: Creating a BlueBoat Planner Node
+title: Creating a BlueBoat Schedule Node
 ---
 
-# BlueBoat Planner Node
+# BlueBoat Schedule Node
 
 
 While the controller node ensures that the BlueBoat can navigate to a single target position, it does **not manage missions or sequences of goals**In real-world scenarios, however, we often want our robot to:
@@ -13,7 +13,7 @@ Visit multiple waypoints,
  - Perform specific actions at each stop (e.g., environmental measurements),
  - And continue the mission autonomously without manual intervention.
 
-To achieve this, we introduce a **planner node** whose role is to orchestrate the mission:
+To achieve this, we introduce a **schedule node** whose role is to orchestrate the mission:
 
  - It maintains a list of goal positions.
  - It sends each target to the controller via a **ROS 2 service call**.
@@ -27,12 +27,11 @@ The planner handles the **"what to do"**, and the controller takes care of **"ho
 
 ## Create a new ROS 2 package
 
-If you haven't already, create a new workspace and a package (e.g., `blueboat_planner`):
+If you haven't already, create a new workspace and a package (e.g., `blueboat_schedule`):
 
 ```bash
-mkdir -p ~/blueboat_ws/src
-cd ~/blueboat_ws/src
-ros2 pkg create --build-type ament_python blueboat_planner
+cd ~/gz_ws/src
+ros2 pkg create --build-type ament_python blueboat_schedule
 ```
 
 Make sure your environment is sourced and you’re using the same workspace you built your BlueBoat simulation in.
@@ -41,9 +40,9 @@ Make sure your environment is sourced and you’re using the same workspace you 
 
 After creating the package, your folder should look like this:
 ```text
-blueboat_planner/
-├── blueboat_planner
-│   └── planner_node.py
+blueboat_schedule/
+├── blueboat_schedule
+│   └── schedule_node.py
 ├── package.xml
 ├── setup.cfg
 ├── setup.py
@@ -53,14 +52,14 @@ blueboat_planner/
 Add the following line to your setup.py under entry_points:
 ```python
 'console_scripts': [
-    'planner_node = blueboat_planner.planner_node:main',
+    'schedule_node = blueboat_schedule.schedule_node:main',
 ],
 ```
 Also make sure to include blueboat_interfaces as a dependency in your package.xml.
 
 ---
 
-## Planner Node Function
+## Schedule Node Function
 
 This node:
 
@@ -74,9 +73,9 @@ Spawns a marker at each location.
 
 Sends the next target.
 
-### planner_node.py
+### schedule_node.py
 
-Place this file inside blueboat_planner/blueboat_planner/:
+Place this file inside blueboat_schedule/blueboat_schedule/:
 ```python
 #!/usr/bin/env python3
 
@@ -87,9 +86,9 @@ from blueboat_interfaces.srv import SetTarget
 import time
 import subprocess
 
-class Planner(Node):
+class Schedule(Node):
     def __init__(self):
-        super().__init__('blueboat_planner')
+        super().__init__('blueboat_schedule')
 
         self.client = self.create_client(SetTarget, 'set_target')
         while not self.client.wait_for_service(timeout_sec=1.0):
@@ -155,7 +154,7 @@ class Planner(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = Planner()
+    node = Schedule()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
@@ -168,14 +167,14 @@ def main(args=None):
 Build and source the workspace:
 
 ```bash
-cd ~/blueboat_ws
+cd ~/gz_ws
 colcon build --symlink-install --merge-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_TESTING=ON -DCMAKE_CXX_STANDARD=17
 source install/setup.bash
 ```
-Then run the planner node (inside your Docker container):
+Then run the schedule node (inside your Docker container):
 
 ```bash
-ros2 run blueboat_planner blueboat_planner
+ros2 run blueboat_schedule blueboat_schedule
 ```
 ---
 
