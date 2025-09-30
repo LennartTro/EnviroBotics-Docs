@@ -75,11 +75,12 @@ Once you're inside the Docker container, you need to build the ROS 2 workspaces 
 
 ### 1. Build BlueBoat Workspace
 
-Navigate to the BlueBoat workspace and build it:
+Navigate to the folder colcon_ws and build it: 
 
 ```bash
 colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
+(If you get any problems during the build-process - don't build the workspace. The files may already be there.)
 
 Source the installed file:
 ```bash
@@ -124,7 +125,7 @@ cd ../gz_ws
 ```bash
 ros2 launch move_blueboat launch_robot_simulation.launch.py
 ```
-But not without sourcing everything in the first place:
+But not without sourcing everything in the first place ;-):
 ```bash
 source install/setup.bash
 source gazebo_exports.sh

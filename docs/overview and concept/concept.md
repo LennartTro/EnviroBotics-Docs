@@ -120,7 +120,7 @@ You will develop your algorithms in ROS and make use of the publisher/subscriber
 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px', marginBottom: '2rem' }}>
   <figure style={{ margin: 0 }}>
     <img
-      src="/EnviroBotics-Docs/img/MeasurementModule.jpg"
+      src="/EnviroBotics-Docs/img/Winch.png"
       alt="Measurement Module"
       style={{ width: '250px', height: 'auto', display: 'block' }}
     />

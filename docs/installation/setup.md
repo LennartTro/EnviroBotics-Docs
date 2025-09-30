@@ -5,7 +5,7 @@ title: Prepare the Shell
 
 # Preface
 
-We recommend to use zsh. This is not mandatory and if you have strongly prefer another shell feel free to do so. But this requires you to adapt the following setup and install instructions.
+We recommend to use zsh. This is not mandatory and if prefer another shell feel free to do so. But this requires you to adapt the following setup and install instructions.
 
 We will also make use of some extensions to make working with the shell more convenient.
 

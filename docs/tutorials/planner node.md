@@ -169,7 +169,7 @@ Build and source the workspace:
 
 ```bash
 cd ~/blueboat_ws
-colcon build
+colcon build --symlink-install --merge-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_TESTING=ON -DCMAKE_CXX_STANDARD=17
 source install/setup.bash
 ```
 Then run the planner node (inside your Docker container):

@@ -5,14 +5,6 @@ title: Hardware Setup
 
 # Hardware Setup
 
-Each robot kit contains:
-
-- ...
-
-## Assembly Guide
-1. ...
-
-
 ## BlueBoat
 
 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px', marginBottom: '2rem' }}>

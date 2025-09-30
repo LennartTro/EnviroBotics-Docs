@@ -365,3 +365,8 @@ This means:
 
 This approach allows other ROS 2 components to navigate the BlueBoat on demand – ideal for interactive or autonomous missions.
 </details> 
+
+If you get stuck, feel free to try the Node Blueboat_regler:
+```bash
+ros2 run blueboat_regler blueboat_regler
+```
