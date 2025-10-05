@@ -252,7 +252,7 @@ You can start with this example:
 # - Script entry point
 #
 # TODOs show where to add code later (subscribers, callbacks, file handling, etc.)
-
+#!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
 # Import message types you’ll use later
