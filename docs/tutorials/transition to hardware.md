@@ -6,13 +6,163 @@ title: Transition to Hardware
 
 # Transition to Hardware
 
-After testing and developing your BlueBoat controller in simulation, it’s time to bring your setup into the real world. This page walks you through the essential steps for running your controller node on real hardware, including how to connect to the vehicle, arm it, test the motors, and send waypoint commands.
+After testing and developing your BlueBoat controller in simulation, it’s time to bring your setup into the real world. This page walks you through the essential steps for running a controller node on real hardware, including how to connect to the vehicle, arm it, test the motors, and send waypoint commands.
+But first, we need to prepare for the temperature measurements in the water.
+
+## Temperature measurement
+
+To check which topics are available in your network, use the following command
+```bash
+ros2 ros2 topic list
+```
+Feel free to start another topic in a with your name in another terminal (inside docker): 
+```bash
+
+ros2 topic pub /chatter std_msgs/String "data: 'My name is ....'"
+
+```
+and show again our topics:
+```bash
+ros2 ros2 topic list
+```
+You can listen with:
+
+```bash
+ros2 topic echo /chatter
+```
+
+### Calling the Service:
+```bash
+ros2 service call /read_temp std_srvs/srv/Trigger {}
+```
+
+### Listen to /temperature-Topic:
+```bash
+ros2 topic echo /temperature
+```
+:::note
+If not already done: Switch to continuous publishing - otherwise it's a service. 
+```bash
+ros2 param set /temperature_sensor_node publish_temperature true
+```
+:::
+
+
+## Use the winch system:
+
+### SetDepth Action (/stepper/set_depth):
+(Please not all at the same time - we are in the same network)
+```bash
+ros2 action send_goal /stepper/set_depth stepper_interfaces/action/SetDepth "target_depth_cm: 15"
+```
+### Receive the feedback:
+```bash
+ros2 action feedback /stepper/set_depth stepper_interfaces/action/SetDepth
+```
+### You may need additional interfaces (please ask for it and build again) 
+```bash
+colcon build --packages-select stepper_interfaces blueboat_guided --merge-install
+```
+
+### TODO: Build your own node (e.g. temperature_subscriber.py) within the blueboat_guided-package. 
+
+1. Check out the previous tutorials or ask how to create another node in the package.
+2. Save each received temperature message to a .txt file for logging purposes.
+3. In the next step, include the current GPS position along with each temperature entry.
+
+You can start with this example: 
+```python
+# file: temperature_logger_node.py
+#
+# Basic ROS 2 Node structure (Python)
+# - Imports
+# - Node class
+# - main() function
+# - Script entry point
+#
+# TODOs show where to add code later (subscribers, callbacks, file handling, etc.)
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+# Import message types you’ll use later
+# e.g. from std_msgs.msg import String
+
+
+class TemperatureLogger(Node):
+    """A simple ROS2 node that will later subscribe to temperature data
+    and write it to a text file (and later also include GPS)."""
+
+    def __init__(self):
+        # Always call the base class constructor first
+        super().__init__('temperature_logger')
+
+        # TODO: Create a subscriber for /temperature
+        # self.subscription = self.create_subscription(
+        #     String, '/temperature', self.temperature_callback, 10
+        # )
+
+        # TODO: Open a text file for writing temperature data
+
+        # TODO: (Later) Add another subscriber for GPS data
+
+        self.get_logger().info('TemperatureLogger node started.')
+
+    # ---------------------------------------------------------------------
+    # TODO: Add your callback functions here
+    # These are called automatically whenever a new message is received.
+    # Example:
+    #
+    # def temperature_callback(self, msg):
+    #     self.get_logger().info(f'Received temperature: {msg.data}')
+    #
+    # ---------------------------------------------------------------------
+
+
+def main(args=None):
+    """Main entry point for the node."""
+    rclpy.init(args=args)        # Initialize the ROS client library
+    node = TemperatureLogger()   # Create the node instance
+    rclpy.spin(node)             # Keep it running (wait for messages)
+    node.destroy_node()          # Cleanup before shutdown
+    rclpy.shutdown()             # Shutdown ROS
+
+
+# This ensures the node runs when the script is executed directly
+if __name__ == '__main__':
+    main()
+
+```
+For further help, please take a look here:
+
+https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html
+
+A little helpful tip:
+```python
+ self.subscription = self.create_subscription(
+            String,
+            '/temperature',
+            self.temperature_callback,
+            10
+        )
+
+def temperature_callback(self, msg):
+      """This function is called whenever a new message is received on /temperature."""
+      self.get_logger().info(f'Received temperature: {msg.data}')
+
+
+```
+
+---
+
+
+## Accessing the BlueOS Interface on Your BlueBoat
 
 :::tip
 The process is similar to what you've done in simulation — just with real data and a real boat now.
 :::
+
+
 ---
-## Accessing the BlueOS Interface on Your BlueBoat
 
 ### Prepare the connection
 
@@ -44,7 +194,7 @@ The process is similar to what you've done in simulation — just with real data
 
 1. Once you have access to the BlueOS interface and the BaseStation is connected:
 
-- Open a terminal on your computer.
+- Open a terminal on your computer (inside docker).
 
 - Start the MAVROS node and connect to the boat using UDP:
 
@@ -201,135 +351,14 @@ Setpoints must be sent repeatedly (e.g., 2 Hz).
 
 We will use guided mode later to approach the measuring points on the water.
 
-## Temperature measurement
 
-
-### Calling the Service:
-```bash
-ros2 service call /read_temp std_srvs/srv/Trigger {}
-```
-
-### Listen to /temperature-Topic:
-```bash
-ros2 topic echo /temperature
-```
-:::note
-If not already done: Switch to continuous publishing - otherwise it's a service. 
-```bash
-ros2 param set /temperature_sensor_node publish_temperature true
-```
-:::
-
-
-## Use the winch system:
-
-### SetDepth Action (/stepper/set_depth):
-
-```bash
-ros2 action send_goal /stepper/set_depth stepper_interfaces/action/SetDepth "target_depth_cm: 15"
-```
-### Receive the feedback:
-```bash
-ros2 action feedback /stepper/set_depth stepper_interfaces/action/SetDepth
-```
-### You may need additional the interfaces (please ask for it and build again) 
-```bash
-colcon build --packages-select stepper_interfaces blueboat_guided --merge-install
-```
-
-### TODO: Build your own node (e.g. temperature_subscriber.py) within the blueboat_guided-package. 
-1. Check out the previous tutorials or ask how to create another node in the package.
-2. Save each received temperature message to a .txt file for logging purposes.
-3. In the next step, include the current GPS position along with each temperature entry.
-
-You can start with this example: 
-```python
-# file: temperature_logger_node.py
-#
-# Basic ROS 2 Node structure (Python)
-# - Imports
-# - Node class
-# - main() function
-# - Script entry point
-#
-# TODOs show where to add code later (subscribers, callbacks, file handling, etc.)
-#!/usr/bin/env python3
-import rclpy
-from rclpy.node import Node
-# Import message types you’ll use later
-# e.g. from std_msgs.msg import String
-
-
-class TemperatureLogger(Node):
-    """A simple ROS2 node that will later subscribe to temperature data
-    and write it to a text file (and later also include GPS)."""
-
-    def __init__(self):
-        # Always call the base class constructor first
-        super().__init__('temperature_logger')
-
-        # TODO: Create a subscriber for /temperature
-        # self.subscription = self.create_subscription(
-        #     String, '/temperature', self.temperature_callback, 10
-        # )
-
-        # TODO: Open a text file for writing temperature data
-
-        # TODO: (Later) Add another subscriber for GPS data
-
-        self.get_logger().info('TemperatureLogger node started.')
-
-    # ---------------------------------------------------------------------
-    # TODO: Add your callback functions here
-    # These are called automatically whenever a new message is received.
-    # Example:
-    #
-    # def temperature_callback(self, msg):
-    #     self.get_logger().info(f'Received temperature: {msg.data}')
-    #
-    # ---------------------------------------------------------------------
-
-
-def main(args=None):
-    """Main entry point for the node."""
-    rclpy.init(args=args)        # Initialize the ROS client library
-    node = TemperatureLogger()   # Create the node instance
-    rclpy.spin(node)             # Keep it running (wait for messages)
-    node.destroy_node()          # Cleanup before shutdown
-    rclpy.shutdown()             # Shutdown ROS
-
-
-# This ensures the node runs when the script is executed directly
-if __name__ == '__main__':
-    main()
-
-```
-For further help, please take a look here:
-
-https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html
-
-A little helpful tip:
-```python
- self.subscription = self.create_subscription(
-            String,
-            '/temperature',
-            self.temperature_callback,
-            10
-        )
-
-def temperature_callback(self, msg):
-      """This function is called whenever a new message is received on /temperature."""
-      self.get_logger().info(f'Received temperature: {msg.data}')
-
-
-```
-
----
 
 ## Start the measurement run
 
 Please adjust the measuring positions and depths. Please do not place the positions too far away from the BaseStation. Ensure that the last position in your list is (48.284864, 11.606720, 0.0) - Otherwise, we'll have trouble getting the boat out of the water =)
+
 Then rebuild the node and source again:
+
 ```bash
 colcon build --packages-select stepper_interfaces blueboat_guided --merge-install
 ```
@@ -376,13 +405,13 @@ This is a brief overview of what happens in this node:
 ```
 ### What each state does (and the triggers)
 
-- NAVIGATE
+- **NAVIGATE**
 
 Loop behavior: At 5 Hz it always publishes the current target GeoPoseStamped to /mavros/setpoint_position/global (reliable QoS) so GUIDED keeps a fresh setpoint stream.
 
 Transition: When Haversine distance to the active waypoint ≤ 3 m, it switches to LOWERING and sends a SetDepth action goal with target_depth_cm = 20.
 
-- LOWERING
+- **LOWERING**
 
 Purpose: Wait for the stepper action (lower winch).
 
@@ -390,7 +419,7 @@ Success → MEASURING.
 
 Failure paths → NAVIGATE: goal rejected, server unavailable, exception, or result not successful.
 
-- MEASURING
+- **MEASURING**
 
 One-shot: Guards with a measured flag so it only triggers once per waypoint.
 
@@ -398,13 +427,13 @@ Action: Calls the /read_temp Trigger service and logs the returned temperature i
 
 Next: Regardless of service success/failure, immediately commands RAISING (winch to 0 cm).
 
-- RAISING
+- **RAISING**
 
 Purpose: Lift the winch to surface (SetDepth goal 0).
 
 Next: Whether the action succeeds, fails, or is rejected/unavailable, it proceeds to HOLD (after logging).
 
-- HOLD
+- **HOLD**
 
 Purpose: Stay on station for 10 s while continuing to stream the waypoint setpoint.
 
@@ -414,10 +443,8 @@ If more waypoints remain: increment wp_idx, clear the measured flag, go back to 
 
 If this was the last waypoint: log completion → conceptual FINISHED; subsequent ticks exit early.
 
-- FINISHED (conceptual)
+- **FINISHED** (conceptual)
 
 Condition: wp_idx >= len(waypoints). The tick logs “Mission abgeschlossen.” and returns.
 
 Continue refining your system and testing it safely in controlled environments before heading out to the lake.
-
-Next step: Build a control node and a planner node to approach different positions, start measurements at each point, and publish the temperature.
