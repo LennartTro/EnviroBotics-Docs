@@ -238,8 +238,9 @@ colcon build --packages-select stepper_interfaces blueboat_guided --merge-instal
 ```
 
 ### TODO: Build your own node (e.g. temperature_subscriber.py) within the blueboat_guided-package. 
-1. Save each received temperature message to a .txt file for logging purposes.
-2. In the next step, include the current GPS position along with each temperature entry.
+1. Check out the previous tutorials or ask how to create another node in the package.
+2. Save each received temperature message to a .txt file for logging purposes.
+3. In the next step, include the current GPS position along with each temperature entry.
 
 You can start with this example: 
 ```python
